@@ -5,20 +5,45 @@ contributions:
     - id: napari-deepfinder.get_reader
       python_name: napari_deepfinder._reader:napari_get_reader
       title: Open data with Napari DeepFinder
-    - id: napari-deepfinder.write_multiple
-      python_name: napari_deepfinder._writer:write_multiple
-      title: Save multi-layer data with Napari DeepFinder
-    - id: napari-deepfinder.write_single_image
-      python_name: napari_deepfinder._writer:write_single_image
-      title: Save image data with Napari DeepFinder  
+    - id: napari-deepfinder.make_denoise_widget
+      python_name: napari_deepfinder._widget:denoise_widget
+      title: Make denoise widget
+    - id: napari-deepfinder.make_reorder_widget
+      python_name: napari_deepfinder._widget:reorder_widget
+      title: Reorder layers automatically
+    - id: napari-deepfinder.make_add_points_widget
+      python_name: napari_deepfinder._widget:AddPointsWidget
+      title: Add points to layers
+    - id: napari-deepfinder.write_annotations
+      python_name: napari_deepfinder._writer:write_annotations_xml
+      title: Save annotation layers (points) to xml file
+    - id: napari-deepfinder.make_orthoview
+      python_name: napari_deepfinder._orthoview_widget:Orthoslice
+      title: Orthoslice
+    - id: napari-deepfinder.make_segmentation
+      python_name: napari_deepfinder._segmentation_widget:SegmentationWidget
+      title: Segmentation
+    - id: napari-deepfinder.make_cluster
+      python_name: napari_deepfinder._cluster_widget:ClusterWidget
+      title: Clustering
   readers:
     - command: napari-deepfinder.get_reader
       accepts_directories: false
-      filename_patterns: ['*.npy'] 
+      filename_patterns: ['*.mrc', '*.map', '*.rec', '*.h5', '*.tif', '*.TIF', '*.xml', '*.ods', '*.xls', '*.xlsx']
   writers:
-    - command: napari-deepfinder.write_multiple
-      layer_types: ['image*','labels*']
-      filename_extensions: []
-    - command: napari-deepfinder.write_single_image
-      layer_types: ['image']
-      filename_extensions: ['.npy'] 
+    - command: napari-deepfinder.write_annotations
+      layer_types: ['points*']
+      filename_extensions: ['.xml']
+  widgets:
+    - command: napari-deepfinder.make_reorder_widget
+      display_name: Reorder layers automatically
+    - command: napari-deepfinder.make_denoise_widget
+      display_name: Denoise tomogram
+    - command: napari-deepfinder.make_add_points_widget
+      display_name: Annotation
+    - command: napari-deepfinder.make_orthoview
+      display_name: Orthoslice view
+    - command: napari-deepfinder.make_segmentation
+      display_name: Segmentation
+    - command: napari-deepfinder.make_cluster
+      display_name: Clustering

@@ -1,7 +1,18 @@
-# from napari_deepfinder import write_single_image, write_multiple
+from napari_deepfinder import write_annotations_xml
+from napari.layers import Points
+import numpy as np
+import os
 
-# add your tests here...
+
+def test_writing_one_layer(tmp_path):
+    data = np.array([[0, 0, 0]])
+    path = os.path.join(str(tmp_path), "test_labels")
+    write_annotations_xml(path, [(data, {'name': 'test'}, 'points')])
 
 
-def test_something():
-    pass
+def test_writing_one_layer(tmp_path):
+    data = np.array([[0, 0, 0]])
+    data_2 = np.array([[1, 1, 1], [0, 0, 0]])
+    path = os.path.join(str(tmp_path), "test_labels")
+    write_annotations_xml(path, [(data, {'name': 'test'}, 'points'),
+                                 (data_2, {'name': 'test2'}, 'points')])

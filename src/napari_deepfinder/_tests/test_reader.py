@@ -1,15 +1,16 @@
-import numpy as np
 from napari_deepfinder import napari_get_reader
+import numpy as np
+import mrcfile
 
 
 # tmp_path is a pytest fixture
 def test_reader(tmp_path):
-    """An example of how you might test your plugin."""
-
     # write some fake data using your supported file format
-    my_test_file = str(tmp_path / "myfile.npy")
-    original_data = np.random.rand(20, 20)
-    np.save(my_test_file, original_data)
+    my_test_file = str(tmp_path / "file1.mrc")
+    original_data = np.zeros((5, 5, 5), dtype=np.int8)
+    original_data[1:4, 1:4, 1:4]
+    with mrcfile.new(my_test_file) as mrc:
+        mrc.set_data(original_data)
 
     # try to read it back in
     reader = napari_get_reader(my_test_file)
