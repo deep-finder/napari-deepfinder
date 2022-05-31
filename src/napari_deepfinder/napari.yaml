@@ -1,0 +1,24 @@
+name: napari-deepfinder
+display_name: Napari DeepFinder
+contributions:
+  commands:
+    - id: napari-deepfinder.get_reader
+      python_name: napari_deepfinder._reader:napari_get_reader
+      title: Open data with Napari DeepFinder
+    - id: napari-deepfinder.write_multiple
+      python_name: napari_deepfinder._writer:write_multiple
+      title: Save multi-layer data with Napari DeepFinder
+    - id: napari-deepfinder.write_single_image
+      python_name: napari_deepfinder._writer:write_single_image
+      title: Save image data with Napari DeepFinder  
+  readers:
+    - command: napari-deepfinder.get_reader
+      accepts_directories: false
+      filename_patterns: ['*.npy'] 
+  writers:
+    - command: napari-deepfinder.write_multiple
+      layer_types: ['image*','labels*']
+      filename_extensions: []
+    - command: napari-deepfinder.write_single_image
+      layer_types: ['image']
+      filename_extensions: ['.npy'] 
