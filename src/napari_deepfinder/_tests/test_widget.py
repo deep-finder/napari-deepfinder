@@ -3,7 +3,7 @@ import numpy as np
 
 
 # make_napari_viewer is a pytest fixture that returns a napari viewer object
-def test_orthoslice(make_napari_viewer):
+def test_orthoslice(make_napari_viewer, qtbot):
     # make viewer and add an image layer using our fixture
     viewer = make_napari_viewer()
     viewer.add_image(np.random.random((100, 100, 20)))
@@ -24,5 +24,5 @@ def test_orthoslice(make_napari_viewer):
     my_widget.checkbox.setChecked(False)
     my_widget._on_click_checkbox(False)
     my_widget.deleteLater()
-    # qtbot.wait(50)
+    qtbot.wait(10)
     pass
