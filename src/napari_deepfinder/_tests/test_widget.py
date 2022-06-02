@@ -1,4 +1,5 @@
 import numpy as np
+from qtpy import QtCore
 
 from napari_deepfinder import (
     AddPointsWidget,
@@ -58,7 +59,8 @@ def test_add_points(make_napari_viewer, qtbot):
     my_widget = AddPointsWidget(viewer)
     viewer.add_points(data=None, ndim=3, name="test_layer")
     my_widget._input_layer_box.setCurrentText("test_layer")
-    my_widget._add_point.toggle()
-    assert viewer.layers["test_layer"].data != np.array([])
+    assert np.array_equal(viewer.layers["test_layer"].data, np.empty([0, 3]))
+    qtbot.mouseClick(my_widget._add_point, QtCore.Qt.LeftButton)
+    assert np.array_equal(viewer.layers["test_layer"].data, np.array([[256., 256., 256.]]))
     my_widget.deleteLater()
     qtbot.wait(10)
