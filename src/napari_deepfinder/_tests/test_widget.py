@@ -1,11 +1,12 @@
 import numpy as np
-from qtpy import QtCore
+from qtpy.QtCore import Qt
 
 from napari_deepfinder import (
     AddPointsWidget,
     ClusterWidget,
     Orthoslice,
     SegmentationWidget,
+    reorder_widget
 )
 
 
@@ -60,7 +61,20 @@ def test_add_points(make_napari_viewer, qtbot):
     viewer.add_points(data=None, ndim=3, name="test_layer")
     my_widget._input_layer_box.setCurrentText("test_layer")
     assert np.array_equal(viewer.layers["test_layer"].data, np.empty([0, 3]))
-    qtbot.mouseClick(my_widget._add_point, QtCore.Qt.LeftButton)
+    qtbot.mouseClick(my_widget._add_point, Qt.LeftButton)
     assert np.array_equal(viewer.layers["test_layer"].data, np.array([[256., 256., 256.]]))
     my_widget.deleteLater()
+    qtbot.wait(10)
+
+
+def test_reorder_layers(make_napari_viewer, qtbot):
+    viewer = make_napari_viewer()
+    my_widget = reorder_widget()
+    viewer.add_points(data=None, ndim=3, name="points")
+    viewer.add_labels(data=np.zeros((512, 512), dtype=int), name="labels")
+    viewer.add_points(data=None, ndim=3, name="points2")
+    viewer.add_image(data=np.zeros((512, 512, 200)), name="image")
+    assert [layer.name for layer in viewer.layers] == ["points", "labels", "points2", "image"]
+    my_widget(viewer)
+    assert [layer.name for layer in viewer.layers] == ["image", "points", "points2", "labels"]
     qtbot.wait(10)
