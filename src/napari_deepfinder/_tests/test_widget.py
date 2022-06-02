@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.ndimage import uniform_filter
 from qtpy.QtCore import Qt
 
 from napari_deepfinder import (
@@ -6,7 +7,8 @@ from napari_deepfinder import (
     ClusterWidget,
     Orthoslice,
     SegmentationWidget,
-    reorder_widget
+    reorder_widget,
+    denoise_widget
 )
 
 
@@ -78,3 +80,15 @@ def test_reorder_layers(make_napari_viewer, qtbot):
     my_widget(viewer)
     assert [layer.name for layer in viewer.layers] == ["image", "points", "points2", "labels"]
     qtbot.wait(10)
+
+
+def test_denoise_widget(make_napari_viewer, qtbot):
+    viewer = make_napari_viewer()
+    my_widget = denoise_widget()
+    # Add image
+    checkerboard = np.indices((10, 10)).sum(axis=0) % 2
+    viewer.add_image(data=checkerboard, name="image")
+    filter_size = 2
+    filtered_image = uniform_filter(checkerboard, size=filter_size)
+    my_widget(viewer, viewer.layers['image'], 2, True)
+    assert np.array_equal(viewer.layers["image_denoised"].data, filtered_image)
