@@ -92,3 +92,23 @@ def test_denoise_widget(make_napari_viewer, qtbot):
     filtered_image = uniform_filter(checkerboard, size=filter_size)
     my_widget(viewer, viewer.layers['image'], 2, True)
     assert np.array_equal(viewer.layers["image_denoised"].data, filtered_image)
+
+
+def test_orthoslice_add_layer(make_napari_viewer, qtbot):
+    # make viewer and add an image layer using our fixture
+    viewer = make_napari_viewer()
+    viewer.add_image(np.random.random((100, 100, 20)))
+    # create our widget, passing in the viewer
+    my_widget = Orthoslice(viewer)
+    # start the widget
+    my_widget.checkbox.setChecked(True)
+    my_widget._on_click_checkbox(True)
+    checkerboard = np.indices((10, 10)).sum(axis=0) % 2
+    viewer.add_image(data=checkerboard, name="image_added")
+    assert np.array_equal(my_widget.main_view.layers["image_added"].data, checkerboard)
+    assert np.array_equal(my_widget.xz_view.layers["image_added"].data, checkerboard)
+    assert np.array_equal(my_widget.yz_view.layers["image_added"].data, checkerboard)
+    my_widget.checkbox.setChecked(False)
+    my_widget._on_click_checkbox(False)
+    my_widget.deleteLater()
+    qtbot.wait(10)
