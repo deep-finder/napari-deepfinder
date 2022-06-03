@@ -103,11 +103,23 @@ def test_orthoslice_add_layer(make_napari_viewer, qtbot):
     # start the widget
     my_widget.checkbox.setChecked(True)
     my_widget._on_click_checkbox(True)
-    checkerboard = np.indices((10, 10)).sum(axis=0) % 2
+    # check adding image
+    checkerboard = np.indices((100, 100, 20)).sum(axis=0) % 2
     viewer.add_image(data=checkerboard, name="image_added")
     assert np.array_equal(my_widget.main_view.layers["image_added"].data, checkerboard)
     assert np.array_equal(my_widget.xz_view.layers["image_added"].data, checkerboard)
     assert np.array_equal(my_widget.yz_view.layers["image_added"].data, checkerboard)
+    # check adding points
+    viewer.add_points(data=None, ndim=3, name="points_added")
+    assert np.array_equal(my_widget.main_view.layers["points_added"].data, np.empty([0, 3]))
+    assert np.array_equal(my_widget.xz_view.layers["points_added"].data, np.empty([0, 3]))
+    assert np.array_equal(my_widget.yz_view.layers["points_added"].data, np.empty([0, 3]))
+    # check adding labels
+    labels = np.zeros((100, 100, 20), dtype=int)
+    viewer.add_labels(data=labels, name="labels_added")
+    assert np.array_equal(my_widget.main_view.layers["labels_added"].data, labels)
+    assert np.array_equal(my_widget.xz_view.layers["labels_added"].data, labels)
+    assert np.array_equal(my_widget.yz_view.layers["labels_added"].data, labels)
     my_widget.checkbox.setChecked(False)
     my_widget._on_click_checkbox(False)
     my_widget.deleteLater()
