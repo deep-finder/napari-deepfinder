@@ -6,7 +6,9 @@ import os
 def test_writing_one_layer(tmp_path):
     data = np.array([[0, 0, 0]])
     path = os.path.join(str(tmp_path), "test_labels")
+    path_with_extension = os.path.join(str(tmp_path), "test_labels2.xml")
     write_annotations_xml(path, [(data, {'name': 'test'}, 'points')])
+    write_annotations_xml(path_with_extension, [(data, {'name': 'test'}, 'points')])
 
 
 def test_writing_multiple_layers(tmp_path):
