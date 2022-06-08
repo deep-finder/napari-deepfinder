@@ -29,6 +29,9 @@ class Orthoslice(QWidget):
         self.z: Optional[float] = None
         self.viewer_list = [self.main_view, self.xz_view, self.yz_view]
         self.gen_zoom_factor: Optional[float] = None
+        # Attributes for the center (viewer and old position) when zoom triggered
+        self.old_cameras = None
+        self.viewer_center_moved = None
         # Don't set init width too low, otherwise the lines might "disappear" sometimes
         self.init_width = 2.5
         # Graphical part
@@ -202,11 +205,53 @@ class Orthoslice(QWidget):
         self.main_view.camera.events.zoom.disconnect(self.zoom)
         self.xz_view.camera.events.zoom.disconnect(self.zoom)
         self.yz_view.camera.events.zoom.disconnect(self.zoom)
+        self.disconnect_center()
 
     def connect_zoom(self):
         self.main_view.camera.events.zoom.connect(self.zoom, position='last')
         self.xz_view.camera.events.zoom.connect(self.zoom, position='last')
         self.yz_view.camera.events.zoom.connect(self.zoom, position='last')
+        self.connect_center()
+
+    def connect_center(self):
+        # Init old cameras
+        self.old_cameras = self.get_old_cameras()
+        # connect center position callbacks
+        self.main_view.camera.events.center.connect(self.old_center_main, position='last')
+        self.xz_view.camera.events.center.connect(self.old_center_xz, position='last')
+        self.yz_view.camera.events.center.connect(self.old_center_yz, position='last')
+
+    def disconnect_center(self):
+        self.main_view.camera.events.center.disconnect(self.old_center_main)
+        self.xz_view.camera.events.center.disconnect(self.old_center_xz)
+        self.yz_view.camera.events.center.disconnect(self.old_center_yz)
+
+    def old_center_main(self, event):
+        old_camera = self.old_cameras[0]
+        self.viewer_center_moved = self.main_view
+        self.disconnect_center()
+        self.mouse_drag(self.viewer_center_moved, None, old_camera)
+        self.connect_center()
+        self.old_cameras = self.get_old_cameras()
+
+    def old_center_xz(self, event):
+        old_camera = self.old_cameras[1]
+        self.viewer_center_moved = self.xz_view
+        self.disconnect_center()
+        self.mouse_drag(self.viewer_center_moved, None, old_camera)
+        self.connect_center()
+        self.old_cameras = self.get_old_cameras()
+
+    def old_center_yz(self, event):
+        old_camera = self.old_cameras[2]
+        self.viewer_center_moved = self.yz_view
+        self.disconnect_center()
+        self.mouse_drag(self.viewer_center_moved, None, old_camera)
+        self.connect_center()
+        self.old_cameras = self.get_old_cameras()
+
+    def get_old_cameras(self):
+        return [self.main_view.camera.copy(), self.xz_view.camera.copy(), self.yz_view.camera.copy()]
 
     def zoom(self, event):
         self.disconnect_zoom()
