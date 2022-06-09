@@ -1,6 +1,8 @@
 import numpy as np
+import pytest
+import collections
 from scipy.ndimage import uniform_filter
-from qtpy.QtCore import Qt
+from qtpy import QtCore
 
 from napari_deepfinder import (
     AddPointsWidget,
@@ -63,7 +65,7 @@ def test_add_points(make_napari_viewer, qtbot):
     viewer.add_points(data=None, ndim=3, name="test_layer")
     my_widget._input_layer_box.setCurrentText("test_layer")
     assert np.array_equal(viewer.layers["test_layer"].data, np.empty([0, 3]))
-    qtbot.mouseClick(my_widget._add_point, Qt.LeftButton)
+    qtbot.mouseClick(my_widget._add_point, QtCore.Qt.LeftButton)
     assert np.array_equal(viewer.layers["test_layer"].data, np.array([[256., 256., 256.]]))
     my_widget.deleteLater()
     qtbot.wait(10)
@@ -120,6 +122,57 @@ def test_orthoslice_add_layer(make_napari_viewer, qtbot):
     assert np.array_equal(my_widget.main_view.layers["labels_added"].data, labels)
     assert np.array_equal(my_widget.xz_view.layers["labels_added"].data, labels)
     assert np.array_equal(my_widget.yz_view.layers["labels_added"].data, labels)
+    my_widget.checkbox.setChecked(False)
+    my_widget._on_click_checkbox(False)
+    my_widget.deleteLater()
+    qtbot.wait(10)
+
+
+@pytest.fixture
+def Event():
+    """Create a subclass for simulating vispy mouse events.
+    Returns
+    -------
+    Event : Type
+        A new tuple subclass named Event that can be used to create a
+        NamedTuple object with fields "type", "is_dragging", and "modifiers".
+    """
+    return collections.namedtuple(
+        'Event', field_names=['type', 'is_dragging', 'modifiers', 'position']
+    )
+
+
+# make_napari_viewer is a pytest fixture that returns a napari viewer object
+def test_orthoslice_click(make_napari_viewer, qtbot, Event):
+    # make viewer and add an image layer using our fixture
+    viewer = make_napari_viewer()
+    viewer.add_image(np.random.random((100, 100, 20)))
+    # create our widget, passing in the viewer
+    my_widget = Orthoslice(viewer)
+    # start the widget
+    my_widget.checkbox.setChecked(True)
+    my_widget._on_click_checkbox(True)
+    # test start position
+    assert my_widget.x == 50
+    assert my_widget.y == 50
+    assert my_widget.z == 10
+    assert np.array_equal(viewer.layers[-1].data, [np.array([[0., 50., 10.], [99., 50., 10.]])])
+    assert np.array_equal(viewer.layers[-2].data, [np.array([[50., 0., 10.], [50., 99., 10.]])])
+
+    # click and test end position
+    # Simulate click
+    click_event = Event(
+        type='mouse_press',
+        is_dragging=False,
+        modifiers=[],
+        position=(75, 75),
+    )
+    my_widget.mouse_single_click(my_widget.main_view, click_event)
+    assert my_widget.x == 75
+    assert my_widget.y == 75
+    assert my_widget.z == 10
+    assert np.array_equal(viewer.layers[-1].data, [np.array([[0., 75., 10.], [99., 75., 10.]])])
+    assert np.array_equal(viewer.layers[-2].data, [np.array([[75., 0., 10.], [75., 99., 10.]])])
     my_widget.checkbox.setChecked(False)
     my_widget._on_click_checkbox(False)
     my_widget.deleteLater()
