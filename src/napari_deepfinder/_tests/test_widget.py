@@ -146,7 +146,7 @@ def Event():
 def test_orthoslice_click(make_napari_viewer, qtbot, Event):
     # make viewer and add an image layer using our fixture
     viewer = make_napari_viewer()
-    viewer.add_image(np.random.random((100, 100, 20)))
+    viewer.add_image(data=np.random.random((100, 100, 20)), name='first')
     # create our widget, passing in the viewer
     my_widget = Orthoslice(viewer)
     # start the widget
@@ -173,6 +173,12 @@ def test_orthoslice_click(make_napari_viewer, qtbot, Event):
     assert my_widget.z == 10
     assert np.array_equal(viewer.layers[-1].data, [np.array([[0., 75., 10.], [99., 75., 10.]])])
     assert np.array_equal(viewer.layers[-2].data, [np.array([[75., 0., 10.], [75., 99., 10.]])])
+    # Insert a layer while in orthoslice view
+    viewer.add_image(data=np.random.random((100, 100, 20)), name='test')
+    assert my_widget.yz_view.layers[-3].name == 'test'
+    # Remove a layer while in orthoslice view
+    viewer.layers.remove(viewer.layers['test'])
+    assert my_widget.yz_view.layers[-3].name == 'first'
     my_widget.checkbox.setChecked(False)
     my_widget._on_click_checkbox(False)
     my_widget.deleteLater()
