@@ -23,7 +23,7 @@ def points_layer_to_df(layer: napari.layers.Layer):
     return layer_df
 
 
-def layers_df_list_to_final_df(layers_df_list: pd.DataFrame):
+def layers_df_list_to_final_df(layers_df_list: list):
     final_list = []
     for i, dataframe in enumerate(layers_df_list):
         # there seems to be a bug in Napari, where a duplicated layer might be the ~same df object
