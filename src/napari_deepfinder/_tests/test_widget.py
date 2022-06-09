@@ -1,4 +1,6 @@
 import numpy as np
+import pytest
+import collections
 from scipy.ndimage import uniform_filter
 from qtpy import QtCore
 
@@ -126,8 +128,22 @@ def test_orthoslice_add_layer(make_napari_viewer, qtbot):
     qtbot.wait(10)
 
 
+@pytest.fixture
+def Event():
+    """Create a subclass for simulating vispy mouse events.
+    Returns
+    -------
+    Event : Type
+        A new tuple subclass named Event that can be used to create a
+        NamedTuple object with fields "type", "is_dragging", and "modifiers".
+    """
+    return collections.namedtuple(
+        'Event', field_names=['type', 'is_dragging', 'modifiers', 'position']
+    )
+
+
 # make_napari_viewer is a pytest fixture that returns a napari viewer object
-def test_orthoslice_click(make_napari_viewer, qtbot):
+def test_orthoslice_click(make_napari_viewer, qtbot, Event):
     # make viewer and add an image layer using our fixture
     viewer = make_napari_viewer()
     viewer.add_image(np.random.random((100, 100, 20)))
@@ -142,12 +158,16 @@ def test_orthoslice_click(make_napari_viewer, qtbot):
     assert my_widget.z == 10
     assert np.array_equal(viewer.layers[-1].data, [np.array([[0., 50., 10.], [99., 50., 10.]])])
     assert np.array_equal(viewer.layers[-2].data, [np.array([[50., 0., 10.], [50., 99., 10.]])])
+
     # click and test end position
-    qtbot.mouseClick(viewer.window.qt_viewer, QtCore.Qt.LeftButton, pos=QtCore.QPoint(75, 75))
-    assert qtbot.mouseClick(viewer.window.qt_viewer, QtCore.Qt.LeftButton, pos=QtCore.QPoint(75, 75)) == 1
-    my_widget.mouse_click_drag(viewer, qtbot.mouseClick(viewer.window.qt_viewer, QtCore.Qt.LeftButton, pos=QtCore.QPoint(75, 75)))
-    my_widget.mouse_click_drag(viewer, viewer.window.qt_viewer.canvas.events.mouse_press(pos=(75, 75), modifiers=(), button=1))
-    my_widget.mouse_click_drag(viewer, viewer.window.qt_viewer.canvas.events.mouse_press(pos=(75, 75), modifiers=(), button=2))
+    # Simulate click
+    click_event = Event(
+        type='mouse_press',
+        is_dragging=False,
+        modifiers=[],
+        position=(75, 75),
+    )
+    my_widget.mouse_single_click(my_widget.main_view, click_event)
     assert my_widget.x == 75
     assert my_widget.y == 75
     assert my_widget.z == 10
