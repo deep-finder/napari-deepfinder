@@ -326,7 +326,7 @@ class Orthoslice(QWidget):
         self.viewfinder_xy[1] = self.main_view.layers[-1]
 
         self.main_view.mouse_drag_callbacks.append(self.mouse_click_drag)
-        # zoom is now hsandled by zoom event!
+        # zoom is now handled by zoom event!
         # self.main_view.mouse_wheel_callbacks.append(self.zoom)
 
         # set window size
