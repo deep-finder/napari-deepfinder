@@ -294,6 +294,9 @@ class Orthoslice(QWidget):
 
     def start_ortho(self):
         self.main_view.window.qt_viewer.set_welcome_visible(False)
+        # force 2d display
+        if self.main_view.dims.ndisplay != 2:
+            self.main_view.dims.ndisplay = 2
         self.main_view.dims.order = [2, 0, 1]
         self.x_max = int(self.main_view.dims.range[0][1]) - 1
         self.y_max = int(self.main_view.dims.range[1][1]) - 1
