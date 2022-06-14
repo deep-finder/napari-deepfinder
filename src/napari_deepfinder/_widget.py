@@ -1,6 +1,6 @@
 import numpy as np
 from magicgui import magic_factory
-from qtpy.QtWidgets import QWidget, QGridLayout, QComboBox, QPushButton, QLabel
+from qtpy.QtWidgets import QWidget, QGridLayout, QComboBox, QPushButton, QLabel, QPlainTextEdit, QGroupBox
 from qtpy import QtCore
 import napari
 import napari.layers
@@ -87,13 +87,27 @@ class AddPointsWidget(QWidget):
         # Use this event because of bug in viewer.events.layers_change.connect() : it doesn't register name change
         napari_viewer.layers.events.connect(self._on_layer_change)
 
+        self.setLayout(QGridLayout())
+        # Info box for annotation
+        self.group_info = QGroupBox('Information')
+        self.box_info = QGridLayout()
+        self.text_info = QPlainTextEdit(
+            """For annotation please respect the following convention for the export to work well:
+        - each points layer needs to end with "_classNumber" (e.g.: ribosome_1)
+        - the class numbers need to range from 1 to number of classes"""
+        )
+        self.text_info.setReadOnly(True)
+        self.box_info.addWidget(self.text_info, 0, 0, QtCore.Qt.AlignTop)
+        self.group_info.setLayout(self.box_info)
+        self.layout().addWidget(self.group_info, 0, 0, 1, 3)
+        # Add points
         self._input_layer_box = QComboBox()
         self._add_point = QPushButton("Add point")
         self._add_point.clicked.connect(self._run)
-        self.setLayout(QGridLayout())
-        self.layout().addWidget(QLabel('Points layer:'), 0, 0)
-        self.layout().addWidget(self._input_layer_box, 0, 1, 1, 2)
-        self.layout().addWidget(self._add_point, 2, 0, 1, 3, QtCore.Qt.AlignTop)
+        self.layout().addWidget(QLabel('Points layer:'), 1, 0, 1, 1)
+        self.layout().addWidget(self._input_layer_box, 1, 1, 1, 2)
+        self.layout().addWidget(self._add_point, 2, 0, 1, 3)
+        self.layout().addWidget(QWidget(), 1, QtCore.Qt.AlignTop)
         self._on_layer_change()
 
     def _on_layer_change(self, event=None):

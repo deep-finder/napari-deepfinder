@@ -5,6 +5,7 @@ import h5py
 import pandas as pd
 import warnings
 from PIL import Image  # for reading tif
+from pathlib import Path
 
 # readable tomograms, see read_array function from deepfinder
 extensions_tomo = ['.mrc', '.map', '.rec', '.h5', '.tif', '.TIF']
@@ -88,6 +89,7 @@ def reader_function(path):
                 layer_type = "image"  # optional, default is "image"
             layer_data.append((data, add_kwargs, layer_type))
         if _path.endswith(tuple(extensions_labels)):
+            name = Path(_path).stem
             df = read_label(_path)
             unq_label = df['class_label'].unique()
             for i in range(len(unq_label)):
@@ -95,9 +97,11 @@ def reader_function(path):
                 data = df_label[['x', 'y', 'z']].values
                 size = 10  # this default value could be changed for each label
                 color = 'white'  # this default value could be changed for each label
+                name_id = name + '_' + str(unq_label[i])
                 add_kwargs = {'out_of_slice_display': True,
                               'size': size,
-                              'face_color': color}
+                              'face_color': color,
+                              'name': name_id}
                 layer_type = "points"
                 layer_data.append((data, add_kwargs, layer_type))
     return layer_data
