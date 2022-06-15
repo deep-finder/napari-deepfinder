@@ -1,4 +1,4 @@
-from napari_deepfinder import write_annotations_xml
+from napari_deepfinder import write_annotations_xml, write_labelmap
 import numpy as np
 import os
 
@@ -17,3 +17,12 @@ def test_writing_multiple_layers(tmp_path):
     path = os.path.join(str(tmp_path), "test_labels")
     write_annotations_xml(path, [(data, {'name': 'test_1'}, 'points'),
                                  (data_2, {'name': 'test_2'}, 'points')])
+
+
+def test_writing_labelmap(tmp_path):
+    data = np.zeros((10, 10, 2), dtype=np.uint8)
+    path = os.path.join(str(tmp_path), "test_labelmap")
+    path_with_extension = os.path.join(str(tmp_path), "test_labelmap2.mrc")
+    write_labelmap(path, data, {'name': 'test'})
+    write_labelmap(path_with_extension, data, {'name': 'test'})
+

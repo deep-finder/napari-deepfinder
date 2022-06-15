@@ -1,12 +1,16 @@
 from __future__ import annotations
 import napari.layers
+import numpy
 import pandas as pd
 from lxml import etree
 import re
+import numpy as np
+from deepfinder.utils import common as cm
 
 
 def write_annotations_xml(path: str, data: list):
     layers_df_list = []
+    # TODO: more flexible order? (not necessarily from 1 to nb of classes)
     order = check_layer_order(data)
     for layer in data:
         layer_df = points_layer_to_df(layer[0])
@@ -21,6 +25,16 @@ def write_annotations_xml(path: str, data: list):
     else:
         write_xml(final_df, path + ".xml")
         return path + ".xml"
+
+
+def write_labelmap(path: str, data: numpy.array, meta: dict):
+    array_label = np.transpose(data, (2, 1, 0))
+    if path[-4:] == '.mrc':
+        cm.write_array(array_label, path)
+        return path
+    else:
+        cm.write_array(array_label, path + ".mrc")
+        return path + ".mrc"
 
 
 def sort_df_list(layers_df_list: list, order: list):

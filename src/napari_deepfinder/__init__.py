@@ -6,6 +6,7 @@ from ._reader import napari_get_reader
 from ._segmentation_widget import SegmentationWidget
 from ._widget import AddPointsWidget, denoise_widget, reorder_widget
 from ._writer import write_annotations_xml
+from ._writer import write_labelmap
 
 
 __all__ = (
@@ -17,4 +18,5 @@ __all__ = (
     "Orthoslice",
     "SegmentationWidget",
     "ClusterWidget",
+    "write_labelmap"
 )

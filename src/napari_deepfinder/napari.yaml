@@ -17,6 +17,9 @@ contributions:
     - id: napari-deepfinder.write_annotations
       python_name: napari_deepfinder._writer:write_annotations_xml
       title: Save annotation layers (points) to xml file
+    - id: napari-deepfinder.write_labelmap
+      python_name: napari_deepfinder._writer:write_labelmap
+      title: Save labelmap layer (labels) to mrc file
     - id: napari-deepfinder.make_orthoview
       python_name: napari_deepfinder._orthoview_widget:Orthoslice
       title: Orthoslice
@@ -34,6 +37,9 @@ contributions:
     - command: napari-deepfinder.write_annotations
       layer_types: ['points*']
       filename_extensions: ['.xml']
+    - command: napari-deepfinder.write_labelmap
+      layer_types: ['labels']
+      filename_extensions: ['.mrc']
   widgets:
     - command: napari-deepfinder.make_reorder_widget
       display_name: Reorder layers automatically
