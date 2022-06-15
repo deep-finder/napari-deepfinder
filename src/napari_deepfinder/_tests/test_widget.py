@@ -24,15 +24,12 @@ def test_orthoslice(make_napari_viewer, qtbot):
     # start the widget
     my_widget.checkbox.setChecked(True)
     my_widget._on_click_checkbox(True)
-    # Check the viewfinders of the main viewer
-    assert my_widget.main_view.layers[-1].name == "viewfinder_xy_y"
-    assert my_widget.main_view.layers[-2].name == "viewfinder_xy_x"
-    # Check the viewfinders of the xz viewer
-    assert my_widget.xz_view.layers[-1].name == "viewfinder_xz_z"
-    assert my_widget.xz_view.layers[-2].name == "viewfinder_xz_x"
-    # Check the viewfinders of the yz viewer
-    assert my_widget.yz_view.layers[-1].name == "viewfinder_yz_z"
-    assert my_widget.yz_view.layers[-2].name == "viewfinder_yz_y"
+    # Check the viewfinder of the main viewer
+    assert my_widget.main_view.layers[-1].name == "viewfinder_xy"
+    # Check the viewfinder of the xz viewer
+    assert my_widget.xz_view.layers[-1].name == "viewfinder_xz"
+    # Check the viewfinder of the yz viewer
+    assert my_widget.yz_view.layers[-1].name == "viewfinder_yz"
     my_widget.checkbox.setChecked(False)
     my_widget._on_click_checkbox(False)
     my_widget.deleteLater()
@@ -156,9 +153,8 @@ def test_orthoslice_click(make_napari_viewer, qtbot, Event):
     assert my_widget.x == 50
     assert my_widget.y == 50
     assert my_widget.z == 10
-    assert np.array_equal(viewer.layers[-1].data, [np.array([[0., 50., 10.], [99., 50., 10.]])])
-    assert np.array_equal(viewer.layers[-2].data, [np.array([[50., 0., 10.], [50., 99., 10.]])])
-
+    assert np.array_equal(viewer.layers[-1].data, np.array([[[50, 0, 10], [0, 100-1, 0]],
+                                                            [[0, 50, 10], [100-1, 0, 0]]]))
     # click and test end position
     # Simulate click
     click_event = Event(
@@ -171,14 +167,14 @@ def test_orthoslice_click(make_napari_viewer, qtbot, Event):
     assert my_widget.x == 75
     assert my_widget.y == 75
     assert my_widget.z == 10
-    assert np.array_equal(viewer.layers[-1].data, [np.array([[0., 75., 10.], [99., 75., 10.]])])
-    assert np.array_equal(viewer.layers[-2].data, [np.array([[75., 0., 10.], [75., 99., 10.]])])
+    assert np.array_equal(viewer.layers[-1].data, np.array([[[75, 0, 10], [0, 100-1, 0]],
+                                                            [[0, 75, 10], [100-1, 0, 0]]]))
     # Insert a layer while in orthoslice view
     viewer.add_image(data=np.random.random((100, 100, 20)), name='test')
-    assert my_widget.yz_view.layers[-3].name == 'test'
+    assert my_widget.yz_view.layers[-2].name == 'test'
     # Remove a layer while in orthoslice view
     viewer.layers.remove(viewer.layers['test'])
-    assert my_widget.yz_view.layers[-3].name == 'first'
+    assert my_widget.yz_view.layers[-2].name == 'first'
     my_widget.checkbox.setChecked(False)
     my_widget._on_click_checkbox(False)
     my_widget.deleteLater()
