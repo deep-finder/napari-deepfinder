@@ -130,7 +130,8 @@ class Orthoslice(QWidget):
         self.update_viewfinders()
 
     def update_viewfinders(self):
-        self.viewfinder_xz.data[0] = [[self.x, self.y,  0], [0, 0, self.z_max]]
+        # viewfinder for xz
+        self.viewfinder_xz.data[0] = [[self.x, self.y, 0], [0, 0, self.z_max]]
         self.viewfinder_xz.data[1] = [[0, self.y, self.z], [self.x_max, 0, 0]]
         # Viewfinder for xy
         self.viewfinder_xy.data[0] = [[self.x, 0, self.z], [0, self.y_max, 0]]
@@ -463,9 +464,9 @@ class Orthoslice(QWidget):
             # So the reordering needs to be triggered after... else there are bugs
             nb_layers = len(self.main_view.layers)
             if index in [nb_layers - 2, nb_layers - 1]:
-                self.xz_view.layers.move(index, nb_layers - 3)
-                self.yz_view.layers.move(index, nb_layers - 3)
-                self.main_view.layers.move(index, nb_layers - 3)
+                self.xz_view.layers.move(index, nb_layers - 2)
+                self.yz_view.layers.move(index, nb_layers - 2)
+                self.main_view.layers.move(index, nb_layers - 2)
                 self.old_layer_names = [layer.name for layer in self.main_view.layers]
             else:
                 # workaround bug insert layer
@@ -474,8 +475,8 @@ class Orthoslice(QWidget):
                 self.main_view.layers.selection.events.changed.disconnect(self.layer_selection)
                 for viewer in self.viewer_list:
                     dummy = napari.layers.Layer.create(np.zeros((1, 1, 1)), {'name': 'dummy'}, layer_type='image')
-                    viewer.layers.insert(nb_layers - 3, dummy)
-                    viewer.layers.remove(viewer.layers[nb_layers - 3])
+                    viewer.layers.insert(nb_layers - 2, dummy)
+                    viewer.layers.remove(viewer.layers[nb_layers - 2])
                 self.main_view.layers.selection.events.changed.connect(self.layer_selection, position='last')
                 self.main_view.layers.events.inserted.connect(self.layer_inserted, position='last')
                 self.main_view.layers.events.removed.connect(self.layer_removed)
