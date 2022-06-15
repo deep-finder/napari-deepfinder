@@ -10,15 +10,14 @@ from deepfinder.utils import common as cm
 
 def write_annotations_xml(path: str, data: list):
     layers_df_list = []
-    # TODO: more flexible order? (not necessarily from 1 to nb of classes)
-    order = check_layer_order(data)
+    class_numbers = []
     for layer in data:
         layer_df = points_layer_to_df(layer[0])
         layers_df_list.append(layer_df)
-    # reorder layers_df_list according to order
-    sorted_layers_df_list = sort_df_list(layers_df_list, order)
-    # transform to final dataframe and write
-    final_df = layers_df_list_to_final_df(sorted_layers_df_list)
+        class_number = layer_order(layer)
+        class_numbers.append(class_number)
+    sorted_layer_list, sorted_class_numbers = sort_layers(layers_df_list, class_numbers)
+    final_df = layers_df_list_to_final_df(sorted_layer_list, sorted_class_numbers)
     if path[-4:] == '.xml':
         write_xml(final_df, path)
         return path
@@ -37,30 +36,27 @@ def write_labelmap(path: str, data: numpy.array, meta: dict):
         return path + ".mrc"
 
 
-def sort_df_list(layers_df_list: list, order: list):
-    new_list = []
-    for i in order:
-        new_list.append(layers_df_list[i - 1])
-    return new_list
-
-
-def check_layer_order(data: list):
-    order = []
-    for layer in data:
-        name = layer[1]['name']
-        regex = re.search("(\d+)$", name)
-        if regex is not None:
-            number_str = regex.group(0)
-            number = int(number_str)
-            order.append(number)
-        else:
-            raise ValueError('Layer must end with _classLabel')
-    order_copy = order.copy()
-    order_copy.sort()
-    if [*range(1, len(order) + 1)] != order_copy:
-        raise ValueError('Class labels must range from 1 to nb of classes')
+def layer_order(layer):
+    name = layer[1]['name']
+    regex = re.search("(\d+)$", name)
+    if regex is not None:
+        number_str = regex.group(0)
+        number = int(number_str)
+        return number
     else:
-        return order
+        raise ValueError('Layer must end with _classLabel')
+
+
+def sort_layers(layers_df_list: list, class_numbers: list):
+    sorted_layer_list = []
+    index_list = [*range(len(class_numbers))]
+    zipped = zip(index_list, class_numbers)
+    sorted_zip = sorted(zipped, key=lambda x: x[1])
+    sorted_index = [x[0] for x in sorted_zip]
+    sorted_class_numbers = [x[1] for x in sorted_zip]
+    for i in sorted_index:
+        sorted_layer_list.append(layers_df_list[i])
+    return sorted_layer_list, sorted_class_numbers
 
 
 def points_layer_to_df(layer: napari.layers.Layer):
@@ -68,12 +64,12 @@ def points_layer_to_df(layer: napari.layers.Layer):
     return layer_df
 
 
-def layers_df_list_to_final_df(layers_df_list: list):
+def layers_df_list_to_final_df(layers_df_list: list, class_numbers: list):
     final_list = []
     for i, dataframe in enumerate(layers_df_list):
         # there seems to be a bug in Napari, where a duplicated layer might be the ~same df object
         df = dataframe.copy(deep=True)
-        class_label = i + 1
+        class_label = class_numbers[i]
         df.insert(loc=0, column='tomo_idx', value='')
         df.insert(loc=1, column='class_label', value=class_label)
         final_list.append(df)
