@@ -139,21 +139,6 @@ class Orthoslice(QWidget):
         # Viewfinder for yz
         self.viewfinder_yz.data[0] = [[self.x, self.y, 0], [0, 0, self.z_max]]
         self.viewfinder_yz.data[1] = [[self.x, 0, self.z], [0, self.y_max, 0]]
-        # for i, layer in enumerate(self.viewfinder_xy):
-        #     if i == 0:
-        #         layer.data = np.array(viewfinder_data_xy_x)
-        #     if i == 1:
-        #         layer.data = np.array(viewfinder_data_xy_y)
-        # for i, layer in enumerate(self.viewfinder_xz):
-        #     if i == 0:
-        #         layer.data = np.array(viewfinder_data_xz_x)
-        #     if i == 1:
-        #         layer.data = np.array(viewfinder_data_xz_z)
-        # for i, layer in enumerate(self.viewfinder_yz):
-        #     if i == 0:
-        #         layer.data = np.array(viewfinder_data_yz_y)
-        #     if i == 1:
-        #         layer.data = np.array(viewfinder_data_yz_z)
         # TODO: replace the dirty fix to update viewfinders
         # dirty fix
         width = self.init_width / self.gen_zoom_factor
@@ -165,11 +150,8 @@ class Orthoslice(QWidget):
 
     def refresh_viewfinders(self):
         self.viewfinder_xz.refresh()
-        # self.viewfinder_xz.refresh()
         self.viewfinder_xy.refresh()
-        # self.viewfinder_xy.refresh()
         self.viewfinder_yz.refresh()
-        # self.viewfinder_yz.refresh()
 
     def mouse_drag(self, viewer: napari.Viewer, event, old_camera):
         xyz_l = viewer.camera.center
@@ -267,11 +249,8 @@ class Orthoslice(QWidget):
         if change:
             width = self.init_width / self.gen_zoom_factor
             self.viewfinder_xz.edge_width = width
-            # self.viewfinder_xz[1].edge_width = [width, width]
             self.viewfinder_xy.edge_width = width
-            # self.viewfinder_xy[1].edge_width = [width, width]
             self.viewfinder_yz.edge_width = width
-            # self.viewfinder_yz[1].edge_width = [width / width]
             self.refresh_viewfinders()
         self.connect_zoom()
 
@@ -312,11 +291,6 @@ class Orthoslice(QWidget):
         self.z_max = int(self.main_view.dims.range[2][1]) - 1
         selection = self.main_view.layers.selection.copy()
         self.gen_zoom_factor = self.main_view.camera.zoom
-        shapes_args = dict(shape_type='line',
-                           ndim=3,
-                           edge_color='red',
-                           opacity=1,
-                           edge_width=self.init_width / self.gen_zoom_factor)
         self.x, self.y, self.z = self.main_view.dims.current_step
 
         viewfinder_data_xz = np.zeros(shape=(2, 2, 3), dtype=np.float32)
@@ -336,8 +310,6 @@ class Orthoslice(QWidget):
                                    name='viewfinder_xy',
                                    edge_width=self.init_width / self.gen_zoom_factor)
         self.viewfinder_xy = self.main_view.layers[-1]
-        # self.main_view.add_vectors(viewfinder_data_xy_y, name='viewfinder_xy_y', **shapes_args)
-        # self.viewfinder_xy[1] = self.main_view.layers[-1]
 
         self.main_view.mouse_drag_callbacks.append(self.mouse_click_drag)
         # zoom is now handled by zoom event!
@@ -374,13 +346,11 @@ class Orthoslice(QWidget):
                                  name='viewfinder_xz',
                                  edge_width=self.init_width / self.gen_zoom_factor)
         self.viewfinder_xz = self.xz_view.layers[-1]
-        # self.xz_view.add_shapes(viewfinder_data_xz_z, name='viewfinder_xz_z', **shapes_args)
-        # self.viewfinder_xz[1] = self.xz_view.layers[-1]
 
-        self.yz_view.add_vectors(viewfinder_data_yz, name='viewfinder_yz')
+        self.yz_view.add_vectors(viewfinder_data_yz,
+                                 name='viewfinder_yz',
+                                 edge_width=self.init_width / self.gen_zoom_factor)
         self.viewfinder_yz = self.yz_view.layers[-1]
-        # self.yz_view.add_shapes(viewfinder_data_yz_z, name='viewfinder_yz_z', **shapes_args)
-        # self.viewfinder_yz[1] = self.yz_view.layers[-1]
 
         self.xz_view.dims.order = [1, 0, 2]
         self.yz_view.dims.order = [0, 1, 2]
@@ -510,12 +480,9 @@ class Orthoslice(QWidget):
 
     def viewfinder_on_top(self):
         index_0 = index_of_layer(self.main_view, self.viewfinder_xy)
-        # index_1 = index_of_layer(self.main_view, self.viewfinder_xy[1])
         nb_layers = len(self.main_view.layers)
         if index_0 != nb_layers - 1:
             self.main_view.layers.move(index_0, nb_layers)
-            # index_1 = index_of_layer(self.main_view, self.viewfinder_xy[1])
-            # self.main_view.layers.move(index_1, nb_layers)
             self.old_layer_names = [layer.name for layer in self.main_view.layers]
 
     def sync_layer(self, event, init=False, layer: Optional[napari.layers.Layer] = None, insert=False,
@@ -623,13 +590,10 @@ class Orthoslice(QWidget):
         self.disconnect_zoom()
         # remove layers and viewers
         self.xz_view.layers.remove(self.xz_view.layers[self.viewfinder_xz.name])
-        # self.xz_view.layers.remove(self.xz_view.layers[self.viewfinder_xz[1].name])
         self.yz_view.layers.remove(self.yz_view.layers[self.viewfinder_yz.name])
-        # self.yz_view.layers.remove(self.yz_view.layers[self.viewfinder_yz[1].name])
         self.xz_view.close()
         self.yz_view.close()
         self.main_view.layers.remove(self.main_view.layers[self.viewfinder_xy.name])
-        # self.main_view.layers.remove(self.main_view.layers[self.viewfinder_xy[1].name])
 
     # currently unused methods
 
