@@ -1,11 +1,7 @@
-import os
 import numpy as np
-import mrcfile
-import h5py
 import pandas as pd
-import warnings
-from PIL import Image  # for reading tif
 from pathlib import Path
+from deepfinder.utils.common import read_array
 
 # readable tomograms, see read_array function from deepfinder
 extensions_tomo = ['.mrc', '.map', '.rec', '.h5', '.tif', '.TIF']
@@ -105,72 +101,6 @@ def reader_function(path):
                 layer_type = "points"
                 layer_data.append((data, add_kwargs, layer_type))
     return layer_data
-
-
-# Reads arrays. Handles .h5 and .mrc files, according to what extension the file has.
-# INPUTS:
-#   filename : string '/path/to/file.ext' with '.ext' either '.h5' or '.mrc'
-#   dset_name: string h5 dataset name. Not necessary to specify when reading .mrc
-# OUTPUT:
-#   array: numpy array
-def read_array(filename, dset_name='dataset'):
-    """Reads arrays. Handles .h5 and .mrc files, according to what extension the file has.
-
-    Args:
-        filename (str): '/path/to/file.ext' with '.ext' either '.h5' or '.mrc'
-        dset_name (str, optional): h5 dataset name. Not necessary to specify when reading .mrc
-
-    Returns:
-        numpy array
-    """
-
-    data_format = os.path.splitext(filename)
-    if data_format[1] == '.h5':
-        array = read_h5array(filename, dset_name)
-    elif data_format[1] == '.mrc' or data_format[1] == '.map' or data_format[1] == '.rec':
-        array = read_mrc(filename)
-    elif data_format[1] == '.tif' or data_format[1] == '.TIF':
-        array = read_tif(filename)
-    else:
-        print('!!! DeepFinder can only read datasets in .h5 and .mrc formats')
-        return None
-        # raise exception ? something could be improved
-    return array
-
-
-# Reads data stored in h5 file, from specified h5 dataset.
-# INPUTS:
-#   filename : string '/path/to/file.h5'
-#   dset_name: string dataset name
-# OUTPUT:
-#   dataArray: numpy array
-def read_h5array(filename, dset_name='dataset'):
-    h5file = h5py.File(filename, 'r')
-    data_array = h5file[dset_name][:]
-    h5file.close()
-    return data_array
-
-
-# Reads array stored as mrc.
-# INPUTS:
-#   filename: string '/path/to/file.mrc'
-# OUTPUT:
-#   array: numpy array
-def read_mrc(filename):
-    warnings.filterwarnings('ignore', '.*Unrecognised machine stamp:.*', )
-    with mrcfile.open(filename, permissive=True) as mrc:
-        array = mrc.data
-    return array
-
-
-def read_tif(filename):
-    dataset = Image.open(filename)
-    h, w = np.shape(dataset)
-    tiffarray = np.zeros((dataset.n_frames, w, h))
-    for i in range(dataset.n_frames):
-        dataset.seek(i)
-        tiffarray[i, :, :] = np.transpose(np.array(dataset))
-    return tiffarray.astype(np.single)
 
 
 def read_label(filename):
