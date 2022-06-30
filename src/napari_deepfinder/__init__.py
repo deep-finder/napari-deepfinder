@@ -7,6 +7,7 @@ from ._segmentation_widget import SegmentationWidget
 from ._widget import AddPointsWidget, denoise_widget, reorder_widget
 from ._writer import write_annotations_xml
 from ._writer import write_labelmap
+from ._writer import write_tomogram
 
 
 __all__ = (
@@ -18,5 +19,6 @@ __all__ = (
     "Orthoslice",
     "SegmentationWidget",
     "ClusterWidget",
-    "write_labelmap"
+    "write_labelmap",
+    "write_tomogram"
 )

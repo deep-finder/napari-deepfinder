@@ -22,8 +22,9 @@ def write_annotations_xml(path: str, data: list):
         write_xml(final_df, path)
         return path
     else:
-        write_xml(final_df, path + ".xml")
-        return path + ".xml"
+        path += '.mrc'
+        write_xml(final_df, path)
+        return path
 
 
 def write_labelmap(path: str, data: numpy.array, meta: dict):
@@ -32,8 +33,20 @@ def write_labelmap(path: str, data: numpy.array, meta: dict):
         cm.write_array(array_label, path)
         return path
     else:
-        cm.write_array(array_label, path + ".mrc")
-        return path + ".mrc"
+        path += '.mrc'
+        cm.write_array(array_label, path)
+        return path
+
+
+def write_tomogram(path: str, data: numpy.array, meta: dict):
+    array_tomo = np.transpose(data, (2, 1, 0))
+    if path[-4] == '.mrc':
+        cm.write_array(array_tomo, path)
+        return path
+    else:
+        path += '.mrc'
+        cm.write_array(array_tomo, path)
+        return path
 
 
 def layer_order(layer):

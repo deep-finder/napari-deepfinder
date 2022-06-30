@@ -20,6 +20,9 @@ contributions:
     - id: napari-deepfinder.write_labelmap
       python_name: napari_deepfinder._writer:write_labelmap
       title: Save labelmap layer (labels) to mrc file
+    - id: napari-deepfinder.write_tomogram
+      python_name: napari_deepfinder._writer:write_tomogram
+      title: Save tomogram layer (image) to mrc file
     - id: napari-deepfinder.make_orthoview
       python_name: napari_deepfinder._orthoview_widget:Orthoslice
       title: Orthoslice
@@ -40,6 +43,9 @@ contributions:
     - command: napari-deepfinder.write_labelmap
       layer_types: ['labels']
       filename_extensions: ['.mrc']
+    - command: napari-deepfinder.write_tomogram
+      layer_types: [ 'image' ]
+      filename_extensions: [ '.mrc' ]
   widgets:
     - command: napari-deepfinder.make_reorder_widget
       display_name: Reorder layers automatically
