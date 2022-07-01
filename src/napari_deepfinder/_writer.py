@@ -22,7 +22,7 @@ def write_annotations_xml(path: str, data: list):
         write_xml(final_df, path)
         return path
     else:
-        path += '.mrc'
+        path += '.xml'
         write_xml(final_df, path)
         return path
 
