@@ -40,7 +40,7 @@ def write_labelmap(path: str, data: numpy.array, meta: dict):
 
 def write_tomogram(path: str, data: numpy.array, meta: dict):
     array_tomo = np.transpose(data, (2, 1, 0))
-    if path[-4] == '.mrc':
+    if path[-4:] == '.mrc':
         cm.write_array(array_tomo, path)
         return path
     else:
