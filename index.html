@@ -83,11 +83,65 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/napari_deepfinder.html#module-napari_deepfinder" title="napari_deepfinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">napari_deepfinder</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#module-napari_deepfinder" title="napari_deepfinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">napari_deepfinder</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
+<span class="target" id="module-napari_deepfinder"></span><dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder.AddPointsWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder.</span></span><span class="sig-name descname"><span class="pre">AddPointsWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.AddPointsWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder.ClusterWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder.</span></span><span class="sig-name descname"><span class="pre">ClusterWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.ClusterWidget" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder.ClusterWidget.browse_output">
+<span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.ClusterWidget.browse_output" title="Permalink to this definition"></a></dt>
+<dd><p>Callback called when the browse output button is clicked</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder.Orthoslice">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder.</span></span><span class="sig-name descname"><span class="pre">Orthoslice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.Orthoslice" title="Permalink to this definition"></a></dt>
+<dd><p>Orthoslice widget</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder.SegmentationWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder.</span></span><span class="sig-name descname"><span class="pre">SegmentationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.SegmentationWidget" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder.SegmentationWidget.browse_output">
+<span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.SegmentationWidget.browse_output" title="Permalink to this definition"></a></dt>
+<dd><p>Callback called when the browse output button is clicked</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder.SegmentationWidget.browse_weights">
+<span class="sig-name descname"><span class="pre">browse_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.SegmentationWidget.browse_weights" title="Permalink to this definition"></a></dt>
+<dd><p>Callback called when the browse weights button is clicked</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder.napari_get_reader">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder.</span></span><span class="sig-name descname"><span class="pre">napari_get_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder.napari_get_reader" title="Permalink to this definition"></a></dt>
+<dd><p>A basic implementation of a Reader contribution.</p>
+<dl class="simple">
+<dt>path<span class="classifier">str or list of str</span></dt><dd><p>Path to file, or list of paths.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>function or None</dt><dd><p>If the path is a recognized format, return a function that accepts the
+same path or list of paths, and returns a list of layer data tuples.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>

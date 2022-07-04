@@ -16,6 +16,11 @@ Contents:
 
    napari_deepfinder
 
+.. automodule:: napari_deepfinder
+   :members:
+   :private-members:
+
+
 Indices and tables
 ==================
 
