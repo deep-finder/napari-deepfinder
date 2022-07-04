@@ -9,6 +9,13 @@ Contents:
 
    about
 
+.. autosummary::
+   :toctree: _autosummary
+   :template: custom-module-template.rst
+   :recursive:
+
+   src/napari_deepfinder
+
 
 Indices and tables
 ==================
