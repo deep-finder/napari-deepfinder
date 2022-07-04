@@ -11,7 +11,6 @@ Contents:
 
 .. autosummary::
    :toctree: _autosummary
-   :template: custom-module-template.rst
    :recursive:
 
    napari_deepfinder
