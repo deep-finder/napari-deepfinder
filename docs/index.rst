@@ -16,7 +16,6 @@ Contents:
 
    napari_deepfinder
 
-
 Indices and tables
 ==================
 
