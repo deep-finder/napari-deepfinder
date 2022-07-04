@@ -9,13 +9,6 @@ Contents:
 
    about
 
-.. autosummary::
-   :toctree: _autosummary
-   :template: custom-module-template.rst
-   :recursive:
-
-   napari_deepfinder
-
 .. automodule:: napari_deepfinder
    :members:
    :private-members:
