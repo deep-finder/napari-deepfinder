@@ -1,23 +1,6 @@
 ﻿napari\_deepfinder
 ==================
 
+.. currentmodule:: napari_deepfinder
+
 .. automodule:: napari_deepfinder
-
-   
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-
