@@ -32,8 +32,10 @@ sys.path.insert(0, os.path.abspath('../src/napari_deepfinder'))
 # ones.
 extensions = [
     'sphinx.ext.ifconfig',
-    'sphinx.ext.autodoc'
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary'
 ]
+autosummary_generate = True  # Turn on sphinx.ext.autosummary
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
