@@ -24,6 +24,10 @@ jobs:
       - name: Install rsync
         run: |
           apt-get update && apt-get install -y rsync
+      
+      - name: Napari linux
+        run: |
+          apt-get install -y libgl1-mesa-glx
 
       - name: Building documentation
         run: |
