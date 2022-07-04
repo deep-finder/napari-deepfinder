@@ -1,0 +1,23 @@
+﻿napari\_deepfinder
+==================
+
+.. automodule:: napari_deepfinder
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
