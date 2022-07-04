@@ -14,7 +14,7 @@ Contents:
    :template: custom-module-template.rst
    :recursive:
 
-   src/napari_deepfinder
+   napari_deepfinder
 
 
 Indices and tables
