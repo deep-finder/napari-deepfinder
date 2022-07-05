@@ -9,6 +9,7 @@ from deepfinder.utils import common as cm
 
 
 def write_annotations_xml(path: str, data: list):
+    """Writer for annotations in for of a xml object list"""
     layers_df_list = []
     class_numbers = []
     for layer in data:
@@ -28,6 +29,7 @@ def write_annotations_xml(path: str, data: list):
 
 
 def write_labelmap(path: str, data: numpy.array, meta: dict):
+    """Writer for labelmaps (segmentation maps)"""
     array_label = np.transpose(data, (2, 1, 0))
     if path[-4:] == '.mrc':
         cm.write_array(array_label, path)
@@ -39,6 +41,7 @@ def write_labelmap(path: str, data: numpy.array, meta: dict):
 
 
 def write_tomogram(path: str, data: numpy.array, meta: dict):
+    """Writer for tomograms"""
     array_tomo = np.transpose(data, (2, 1, 0))
     if path[-4:] == '.mrc':
         cm.write_array(array_tomo, path)
