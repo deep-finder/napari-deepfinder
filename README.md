@@ -7,7 +7,10 @@
 [![codecov](https://codecov.io/gh/deep-finder/napari-deepfinder/branch/main/graph/badge.svg)](https://codecov.io/gh/deep-finder/napari-deepfinder)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-deepfinder)](https://napari-hub.org/plugins/napari-deepfinder)
 
-A napari plugin for the DeepFinder library which includes display, annotation, target generation, segmentation and clustering functionalities. An orthoslice view has been added for an easier visualisation and annotation process.
+A napari plugin for the DeepFinder library which includes display, annotation, target generation, segmentation and clustering functionalities.
+An orthoslice view has been added for an easier visualisation and annotation process.
+
+**The documentation for users is available [here](https://deep-finder.github.io/napari-deepfinder/).**
 
 ----------------------------------
 
