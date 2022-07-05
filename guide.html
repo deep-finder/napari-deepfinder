@@ -41,21 +41,23 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#general-purpose-visualisation">General purpose visualisation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#open-files">Open files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#automatic-reordering-of-layer">Automatic reordering of layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#navigate-through-the-data-in-orthoslice-view-useful-for-annotation">Navigate through the data in orthoslice view (useful for annotation)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#basic-denoising-useful-for-annotation">Basic denoising (useful for annotation)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-purpose-visualisation">General purpose visualisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#open-files">Open files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-reordering-of-layer">Automatic reordering of layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#navigate-through-the-data-in-orthoslice-view-useful-for-annotation">Navigate through the data in orthoslice view (useful for annotation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-denoising-useful-for-annotation">Basic denoising (useful for annotation)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#before-training-phase-annotation">Before-training phase (annotation)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#annotation-of-points">Annotation of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#before-training-phase-annotation">Before-training phase (annotation)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-of-points">Annotation of points</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#inference-phase">Inference phase</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#segmentation">Segmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#clustering">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inference-phase">Inference phase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#segmentation">Segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clustering">Clustering</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -86,30 +88,29 @@
              
   <section id="guide">
 <h1>Guide<a class="headerlink" href="#guide" title="Permalink to this heading"></a></h1>
-</section>
 <section id="general-purpose-visualisation">
-<h1>General purpose visualisation<a class="headerlink" href="#general-purpose-visualisation" title="Permalink to this heading"></a></h1>
+<h2>General purpose visualisation<a class="headerlink" href="#general-purpose-visualisation" title="Permalink to this heading"></a></h2>
 <section id="open-files">
-<h2>Open files<a class="headerlink" href="#open-files" title="Permalink to this heading"></a></h2>
+<h3>Open files<a class="headerlink" href="#open-files" title="Permalink to this heading"></a></h3>
 <p>Once <cite>napari-deepfinder</cite> is installed, you will be able to open the files associated with the cryo-et workflow:</p>
 <ul class="simple">
 <li><p>tomograms and segmentation maps as <cite>.mrc</cite>, <cite>.map</cite>, <cite>.rec</cite>, <cite>.h5</cite>, <cite>.tif</cite> or <cite>.TIF</cite></p></li>
 <li><p>annotation object lists as <cite>.xml</cite>, <cite>.ods</cite>, <cite>.xls</cite> or <cite>.xlsx</cite></p></li>
 </ul>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The following features are all different widgets included in the plugin.</p>
 <p>To open them click on the <cite>Plugins</cite> menu of napari, select napari-deepfinder` and you will the list of widgets available.
 Click on the widget of this list to enable or disable it!</p>
 </div>
 </section>
 <section id="automatic-reordering-of-layer">
-<h2>Automatic reordering of layer<a class="headerlink" href="#automatic-reordering-of-layer" title="Permalink to this heading"></a></h2>
+<h3>Automatic reordering of layer<a class="headerlink" href="#automatic-reordering-of-layer" title="Permalink to this heading"></a></h3>
 <p>A small widget has been added to reorder the layers automatically to have the tomograms at the bottom and superpose the segmentation map and the points annotations as a last layer.
 Correctly ordered layers simplify the visualisation.</p>
 </section>
 <section id="navigate-through-the-data-in-orthoslice-view-useful-for-annotation">
-<h2>Navigate through the data in orthoslice view (useful for annotation)<a class="headerlink" href="#navigate-through-the-data-in-orthoslice-view-useful-for-annotation" title="Permalink to this heading"></a></h2>
+<h3>Navigate through the data in orthoslice view (useful for annotation)<a class="headerlink" href="#navigate-through-the-data-in-orthoslice-view-useful-for-annotation" title="Permalink to this heading"></a></h3>
 <p>Enable the <cite>Orthoslice view</cite> widget and activate the Orthoslice checkbox to start the orthoslice viewer.
 You will now see 3 synchronised viewer (the main <cite>x,y</cite> viewer and 2 secondary <cite>x, z</cite> and <cite>z, y</cite> viewer).</p>
 <div class="admonition important">
@@ -119,19 +120,19 @@ You will now see 3 synchronised viewer (the main <cite>x,y</cite> viewer and 2 s
 </div>
 </section>
 <section id="basic-denoising-useful-for-annotation">
-<h2>Basic denoising (useful for annotation)<a class="headerlink" href="#basic-denoising-useful-for-annotation" title="Permalink to this heading"></a></h2>
+<h3>Basic denoising (useful for annotation)<a class="headerlink" href="#basic-denoising-useful-for-annotation" title="Permalink to this heading"></a></h3>
 <p>The <cite>Denoise tomogram</cite> widget is for visualisation purposes only.
 You can choose the image layer (tomogram) you want to denoise and the filter size (mean filter) you want to use.</p>
 </section>
 </section>
 <section id="before-training-phase-annotation">
-<h1>Before-training phase (annotation)<a class="headerlink" href="#before-training-phase-annotation" title="Permalink to this heading"></a></h1>
+<h2>Before-training phase (annotation)<a class="headerlink" href="#before-training-phase-annotation" title="Permalink to this heading"></a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The proper training of the neural network does not happen in this plugin</p>
 </div>
 <section id="annotation-of-points">
-<h2>Annotation of points<a class="headerlink" href="#annotation-of-points" title="Permalink to this heading"></a></h2>
+<h3>Annotation of points<a class="headerlink" href="#annotation-of-points" title="Permalink to this heading"></a></h3>
 <p>A basic <cite>Annotation</cite> widget is available, with some included information banner.
 For each points annotation class, you need to create a points layer in napari and respect a naming convention that is explained inside the plugin.</p>
 <p>This widget is designed for the orthoslice view and is not needed for annotation in non-orthoslice view
@@ -147,13 +148,13 @@ For each points annotation class, you need to create a points layer in napari an
 </section>
 </section>
 <section id="inference-phase">
-<h1>Inference phase<a class="headerlink" href="#inference-phase" title="Permalink to this heading"></a></h1>
+<h2>Inference phase<a class="headerlink" href="#inference-phase" title="Permalink to this heading"></a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>This phase is only possible once DeepFinder has been trained, training does not happen in this plugin.</p>
 </div>
 <section id="segmentation">
-<h2>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this heading"></a></h2>
+<h3>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this heading"></a></h3>
 <p>The <cite>Segmentation</cite> widget serves as a graphical user interface to generate a segmenatation map based on the trained DeepFinder model.
 You need to select the file containing the weights of the network and select other parameters. Those parameters are mostly explained here: <a class="reference external" href="https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation">https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation</a>.</p>
 <div class="admonition important">
@@ -163,7 +164,7 @@ You need to select the file containing the weights of the network and select oth
 </div>
 </section>
 <section id="clustering">
-<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading"></a></h2>
+<h3>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading"></a></h3>
 <p>The <cite>Clustering</cite> widget enables to obtain the points/the centroids of some macromolecules based on the segmentation map.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -172,6 +173,7 @@ You need to select the file containing the weights of the network and select oth
 Do not use the segmentation map visible in you viewer, but reload the saved binned label map from the saved file.</p>
 </div>
 <p>For more information about this step and the several parameters, you can have a look here: <a class="reference external" href="https://deepfinder.readthedocs.io/en/latest/guide.html#clustering">https://deepfinder.readthedocs.io/en/latest/guide.html#clustering</a>.</p>
+</section>
 </section>
 </section>
 

@@ -12,7 +12,8 @@ This is really useful and advised, especially because `napari-deepfinder` will i
 Installation of `napari-deepfinder`
 -----------------------------------
 
-The general purpose guide for installing napari plugins is available `here <https://napari.org/plugins/find_and_install_plugin.html>`_
+The general purpose guide for installing napari plugins is available `here <https://napari.org/plugins/find_and_install_plugin.html>`_.
+
 Basically you need to start napari and go in the plugin menu. There you will find the `Install/Uninstall Plugins` entry, which once clicked opens a new dedicated window.
 There you can either:
 
@@ -22,10 +23,10 @@ There you can either:
 
 You can also install the plugin through the command line in the virtual environment by using `pip <https://pypi.org/project/pip/>`_:
 
-    pip install napari-deepfinder
-or (for the latest development version)
+    ``pip install napari-deepfinder``
+or (for the latest development version):
 
-    pip install git+https://github.com/deep-finder/napari-deepfinder.git
+    ``pip install git+https://github.com/deep-finder/napari-deepfinder.git``
 
 Introduction tutorial
 ---------------------
