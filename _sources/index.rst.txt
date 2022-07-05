@@ -10,6 +10,8 @@ Contents:
    about
    quickstart
    guide
+   help
+   developers
 
 Indices and tables
 ==================

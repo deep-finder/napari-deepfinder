@@ -17,14 +17,15 @@ Once `napari-deepfinder` is installed, you will be able to open the files associ
     To open them click on the `Plugins` menu of napari, select napari-deepfinder` and you will the list of widgets available.
     Click on the widget of this list to enable or disable it!
 
-Automatic reordering of layer
-+++++++++++++++++++++++++++++
+Automatic reordering of layers
+++++++++++++++++++++++++++++++
 
 A small widget has been added to reorder the layers automatically to have the tomograms at the bottom and superpose the segmentation map and the points annotations as a last layer.
 Correctly ordered layers simplify the visualisation.
 
-Navigate through the data in orthoslice view (useful for annotation)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Orthoslice view (useful for annotation)
++++++++++++++++++++++++++++++++++++++++
+
 Enable the `Orthoslice view` widget and activate the Orthoslice checkbox to start the orthoslice viewer.
 You will now see 3 synchronised viewer (the main `x,y` viewer and 2 secondary `x, z` and `z, y` viewer).
 
@@ -32,7 +33,7 @@ You will now see 3 synchronised viewer (the main `x,y` viewer and 2 secondary `x
 
     This is currently a non-resolved technical issue, because e.g. on MacOS a user could in theory add a widget to secondary viewers.
 
-Basic denoising (useful for annotation)
+Denoising (useful for annotation)
 +++++++++++++++++++++++++++++++++++++++
 The `Denoise tomogram` widget is for visualisation purposes only.
 You can choose the image layer (tomogram) you want to denoise and the filter size (mean filter) you want to use.
@@ -64,10 +65,12 @@ Inference phase
 Segmentation
 ++++++++++++
 The `Segmentation` widget serves as a graphical user interface to generate a segmenatation map based on the trained DeepFinder model.
-You need to select the file containing the weights of the network and select other parameters. Those parameters are mostly explained here: https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation.
+You need to select the file containing the weights of the network and select other parameters.
+Those parameters are mostly explained here: https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation.
 
 .. important:: Be aware that this step might last several minutes and consume a lot of RAM and computing ressources
-    (you can play with the patch size to optimize the segmentation time: not too low to gain time, and not too high because it might lead in `out of memory (OOM)` errors because you don't have enough RAM).
+    (you can play with the patch size to optimize the segmentation time:
+    not too low to gain time, and not too high because it might lead in `out of memory (OOM)` errors because you don't have enough RAM).
 
 Clustering
 ++++++++++

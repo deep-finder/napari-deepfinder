@@ -20,6 +20,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting help" href="help.html" />
     <link rel="prev" title="Quickstart" href="quickstart.html" /> 
 </head>
 
@@ -44,9 +45,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#general-purpose-visualisation">General purpose visualisation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#open-files">Open files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#automatic-reordering-of-layer">Automatic reordering of layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#navigate-through-the-data-in-orthoslice-view-useful-for-annotation">Navigate through the data in orthoslice view (useful for annotation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#basic-denoising-useful-for-annotation">Basic denoising (useful for annotation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-reordering-of-layers">Automatic reordering of layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orthoslice-view-useful-for-annotation">Orthoslice view (useful for annotation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#denoising-useful-for-annotation">Denoising (useful for annotation)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#before-training-phase-annotation">Before-training phase (annotation)</a><ul>
@@ -60,6 +61,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">Developers</a></li>
 </ul>
 
         </div>
@@ -104,13 +107,13 @@
 Click on the widget of this list to enable or disable it!</p>
 </div>
 </section>
-<section id="automatic-reordering-of-layer">
-<h3>Automatic reordering of layer<a class="headerlink" href="#automatic-reordering-of-layer" title="Permalink to this heading"></a></h3>
+<section id="automatic-reordering-of-layers">
+<h3>Automatic reordering of layers<a class="headerlink" href="#automatic-reordering-of-layers" title="Permalink to this heading"></a></h3>
 <p>A small widget has been added to reorder the layers automatically to have the tomograms at the bottom and superpose the segmentation map and the points annotations as a last layer.
 Correctly ordered layers simplify the visualisation.</p>
 </section>
-<section id="navigate-through-the-data-in-orthoslice-view-useful-for-annotation">
-<h3>Navigate through the data in orthoslice view (useful for annotation)<a class="headerlink" href="#navigate-through-the-data-in-orthoslice-view-useful-for-annotation" title="Permalink to this heading"></a></h3>
+<section id="orthoslice-view-useful-for-annotation">
+<h3>Orthoslice view (useful for annotation)<a class="headerlink" href="#orthoslice-view-useful-for-annotation" title="Permalink to this heading"></a></h3>
 <p>Enable the <cite>Orthoslice view</cite> widget and activate the Orthoslice checkbox to start the orthoslice viewer.
 You will now see 3 synchronised viewer (the main <cite>x,y</cite> viewer and 2 secondary <cite>x, z</cite> and <cite>z, y</cite> viewer).</p>
 <div class="admonition important">
@@ -119,8 +122,8 @@ You will now see 3 synchronised viewer (the main <cite>x,y</cite> viewer and 2 s
 <p>This is currently a non-resolved technical issue, because e.g. on MacOS a user could in theory add a widget to secondary viewers.</p>
 </div>
 </section>
-<section id="basic-denoising-useful-for-annotation">
-<h3>Basic denoising (useful for annotation)<a class="headerlink" href="#basic-denoising-useful-for-annotation" title="Permalink to this heading"></a></h3>
+<section id="denoising-useful-for-annotation">
+<h3>Denoising (useful for annotation)<a class="headerlink" href="#denoising-useful-for-annotation" title="Permalink to this heading"></a></h3>
 <p>The <cite>Denoise tomogram</cite> widget is for visualisation purposes only.
 You can choose the image layer (tomogram) you want to denoise and the filter size (mean filter) you want to use.</p>
 </section>
@@ -156,11 +159,13 @@ For each points annotation class, you need to create a points layer in napari an
 <section id="segmentation">
 <h3>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this heading"></a></h3>
 <p>The <cite>Segmentation</cite> widget serves as a graphical user interface to generate a segmenatation map based on the trained DeepFinder model.
-You need to select the file containing the weights of the network and select other parameters. Those parameters are mostly explained here: <a class="reference external" href="https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation">https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation</a>.</p>
+You need to select the file containing the weights of the network and select other parameters.
+Those parameters are mostly explained here: <a class="reference external" href="https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation">https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation</a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Be aware that this step might last several minutes and consume a lot of RAM and computing ressources
-(you can play with the patch size to optimize the segmentation time: not too low to gain time, and not too high because it might lead in <cite>out of memory (OOM)</cite> errors because you don’t have enough RAM).</p>
+(you can play with the patch size to optimize the segmentation time:
+not too low to gain time, and not too high because it might lead in <cite>out of memory (OOM)</cite> errors because you don’t have enough RAM).</p>
 </div>
 </section>
 <section id="clustering">
@@ -182,6 +187,7 @@ Do not use the segmentation map visible in you viewer, but reload the saved binn
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="help.html" class="btn btn-neutral float-right" title="Getting help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
