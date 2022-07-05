@@ -8,11 +8,8 @@ Contents:
    :maxdepth: 2
 
    about
-
-.. automodule:: napari_deepfinder
-   :members:
-   :private-members:
-
+   quickstart
+   guide
 
 Indices and tables
 ==================

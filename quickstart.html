@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quickstart &mdash; napari-deepfinder  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Guide" href="guide.html" />
+    <link rel="prev" title="About" href="about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> napari-deepfinder
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-clean-environment">A clean environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-of-napari-deepfinder">Installation of <cite>napari-deepfinder</cite></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-tutorial">Introduction tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html#general-purpose-visualisation">General purpose visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html#before-training-phase-annotation">Before-training phase (annotation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html#inference-phase">Inference phase</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">napari-deepfinder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Quickstart</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quickstart.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h1>
+<section id="a-clean-environment">
+<h2>A clean environment<a class="headerlink" href="#a-clean-environment" title="Permalink to this heading"></a></h2>
+<p>First of all you need a working installation of napari, you can refer to that webpage for more info <a class="reference external" href="https://napari.org/#installation">https://napari.org/#installation</a> .
+It is strongly recommended to work with virtual environments (such as virtualenv or conda).
+You can create a new environment especially for your work with napari-deepfinder.
+This is really useful and advised, especially because <cite>napari-deepfinder</cite> will install a lot of dependencies (including deepfinder and it’s dependencies).</p>
+</section>
+<section id="installation-of-napari-deepfinder">
+<h2>Installation of <cite>napari-deepfinder</cite><a class="headerlink" href="#installation-of-napari-deepfinder" title="Permalink to this heading"></a></h2>
+<p>The general purpose guide for installing napari plugins is available <a class="reference external" href="https://napari.org/plugins/find_and_install_plugin.html">here</a>
+Basically you need to start napari and go in the plugin menu. There you will find the <cite>Install/Uninstall Plugins</cite> entry, which once clicked opens a new dedicated window.
+There you can either:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>enter the name <cite>napari-deepfinder</cite></p></li>
+<li><p>enter the url <a class="reference external" href="https://github.com/deep-finder/napari-deepfinder">https://github.com/deep-finder/napari-deepfinder</a></p></li>
+<li><p>drag and drop the folder of a downloaded copy of the source code of the plugin</p></li>
+</ul>
+</div></blockquote>
+<p>You can also install the plugin through the command line in the virtual environment by using <a class="reference external" href="https://pypi.org/project/pip/">pip</a>:</p>
+<blockquote>
+<div><p>pip install napari-deepfinder</p>
+</div></blockquote>
+<p>or (for the latest development version)</p>
+<blockquote>
+<div><p>pip install git+https://github.com/deep-finder/napari-deepfinder.git</p>
+</div></blockquote>
+</section>
+<section id="introduction-tutorial">
+<h2>Introduction tutorial<a class="headerlink" href="#introduction-tutorial" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about.html" class="btn btn-neutral float-left" title="About" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="guide.html" class="btn btn-neutral float-right" title="Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, napari-deepfinder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
