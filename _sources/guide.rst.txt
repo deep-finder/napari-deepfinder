@@ -14,8 +14,8 @@ Once `napari-deepfinder` is installed, you will be able to open the files associ
 
 .. note:: The following features are all different widgets included in the plugin.
 
-    To open them click on the `Plugins` menu of napari, select napari-deepfinder` and you will the list of widgets available.
-    Click on the widget of this list to enable or disable it!
+    To open them, click on the `Plugins` menu of napari, select napari-deepfinder` and you will see the list of widgets available.
+    Click on the desired widget of this list to enable or disable it!
 
 Automatic reordering of layers
 ++++++++++++++++++++++++++++++
@@ -26,7 +26,7 @@ Correctly ordered layers simplify the visualisation.
 Orthoslice view (useful for annotation)
 +++++++++++++++++++++++++++++++++++++++
 
-Enable the `Orthoslice view` widget and activate the Orthoslice checkbox to start the orthoslice viewer.
+Enable the `Orthoslice view` widget and activate the `Orthoslice` checkbox to start the orthoslice viewer.
 You will now see 3 synchronised viewer (the main `x,y` viewer and 2 secondary `x, z` and `z, y` viewer).
 
 .. important:: Please be careful and don't add widgets to the secondary viewers but only to the main viewer.
@@ -64,8 +64,8 @@ Inference phase
 
 Segmentation
 ++++++++++++
-The `Segmentation` widget serves as a graphical user interface to generate a segmenatation map based on the trained DeepFinder model.
-You need to select the file containing the weights of the network and select other parameters.
+The `Segmentation` widget serves as a graphical user interface to generate a segmentation map based on the trained DeepFinder model.
+You need to select the file containing the weights of the network and set other parameters.
 Those parameters are mostly explained here: https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation.
 
 .. important:: Be aware that this step might last several minutes and consume a lot of RAM and computing ressources

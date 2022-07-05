@@ -43,7 +43,20 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Getting help</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Developers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-napari_deepfinder._reader">Readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-napari_deepfinder._writer">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#widgets">Widgets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reorder-layers">Reorder layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#denoising">Denoising</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation">Annotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-napari_deepfinder._segmentation_widget">Segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-napari_deepfinder._cluster_widget">Clustering</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -72,6 +85,98 @@
              
   <section id="developers">
 <h1>Developers<a class="headerlink" href="#developers" title="Permalink to this heading"></a></h1>
+<section id="module-napari_deepfinder._reader">
+<span id="readers"></span><h2>Readers<a class="headerlink" href="#module-napari_deepfinder._reader" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._reader.napari_get_reader">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._reader.</span></span><span class="sig-name descname"><span class="pre">napari_get_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._reader.napari_get_reader" title="Permalink to this definition"></a></dt>
+<dd><p>A basic implementation of a Reader contribution.</p>
+<dl class="simple">
+<dt>path<span class="classifier">str or list of str</span></dt><dd><p>Path to file, or list of paths.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>function or None</dt><dd><p>If the path is a recognized format, return a function that accepts the
+same path or list of paths, and returns a list of layer data tuples.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._reader.reader_function">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._reader.</span></span><span class="sig-name descname"><span class="pre">reader_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._reader.reader_function" title="Permalink to this definition"></a></dt>
+<dd><p>Take a path or list of paths and return a list of LayerData tuples.</p>
+<p>Readers are expected to return data as a list of tuples, where each tuple
+is (data, [add_kwargs, [layer_type]]), “add_kwargs” and “layer_type” are
+both optional.</p>
+<dl class="simple">
+<dt>path<span class="classifier">str or list of str</span></dt><dd><p>Path to file, or list of paths.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>layer_data<span class="classifier">list of tuples</span></dt><dd><p>A list of LayerData tuples where each tuple in the list contains
+(data, metadata, layer_type), where data is a numpy array, metadata is
+a dict of keyword arguments for the corresponding viewer.add_* method
+in napari, and layer_type is a lower-case string naming the type of layer.
+Both “meta”, and “layer_type” are optional. napari will default to
+layer_type==”image” if not provided</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-napari_deepfinder._writer">
+<span id="writers"></span><h2>Writers<a class="headerlink" href="#module-napari_deepfinder._writer" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id1">
+<h2>Writers<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<span class="target" id="module-0"></span></section>
+<section id="widgets">
+<h2>Widgets<a class="headerlink" href="#widgets" title="Permalink to this heading"></a></h2>
+<section id="reorder-layers">
+<h3>Reorder layers<a class="headerlink" href="#reorder-layers" title="Permalink to this heading"></a></h3>
+</section>
+<section id="denoising">
+<h3>Denoising<a class="headerlink" href="#denoising" title="Permalink to this heading"></a></h3>
+</section>
+<section id="annotation">
+<h3>Annotation<a class="headerlink" href="#annotation" title="Permalink to this heading"></a></h3>
+</section>
+<section id="module-napari_deepfinder._segmentation_widget">
+<span id="segmentation"></span><h3>Segmentation<a class="headerlink" href="#module-napari_deepfinder._segmentation_widget" title="Permalink to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._segmentation_widget.</span></span><span class="sig-name descname"><span class="pre">SegmentationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget.browse_output">
+<span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget.browse_output" title="Permalink to this definition"></a></dt>
+<dd><p>Callback called when the browse output button is clicked</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget.browse_weights">
+<span class="sig-name descname"><span class="pre">browse_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget.browse_weights" title="Permalink to this definition"></a></dt>
+<dd><p>Callback called when the browse weights button is clicked</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-napari_deepfinder._cluster_widget">
+<span id="clustering"></span><h3>Clustering<a class="headerlink" href="#module-napari_deepfinder._cluster_widget" title="Permalink to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder._cluster_widget.ClusterWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._cluster_widget.</span></span><span class="sig-name descname"><span class="pre">ClusterWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._cluster_widget.ClusterWidget" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder._cluster_widget.ClusterWidget.browse_output">
+<span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._cluster_widget.ClusterWidget.browse_output" title="Permalink to this definition"></a></dt>
+<dd><p>Callback called when the browse output button is clicked</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
 </section>
 
 
