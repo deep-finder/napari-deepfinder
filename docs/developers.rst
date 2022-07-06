@@ -19,13 +19,13 @@ Widgets
 Reorder layers
 ++++++++++++++
 
-.. autoclass:: napari_deepfinder._widget::reorder_widget
+.. autofunction:: napari_deepfinder._widget::reorder_widget
    :members:
 
 Denoising
 +++++++++
 
-.. autoclass:: napari_deepfinder._widget::denoise_widget
+.. autofunction:: napari_deepfinder._widget::denoise_widget
    :members:
 
 Annotation
