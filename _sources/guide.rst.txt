@@ -9,8 +9,8 @@ Open files
 
 Once `napari-deepfinder` is installed, you will be able to open the files associated with the cryo-et workflow:
 
-* tomograms and segmentation maps as `.mrc`, `.map`, `.rec`, `.h5`, `.tif` or `.TIF`
-* annotation object lists as `.xml`, `.ods`, `.xls` or `.xlsx`
+* Tomograms and segmentation maps as `.mrc`, `.map`, `.rec`, `.h5`, `.tif` or `.TIF`
+* Annotation object lists as `.xml`, `.ods`, `.xls` or `.xlsx`
 
 .. note:: The following features are all different widgets included in the plugin.
 
@@ -53,9 +53,9 @@ This widget is designed for the orthoslice view and is not needed for annotation
 (but you need to respect the naming conventions explained in the widget information banner in non-orthoslice view nonetheless to be able to use the object list export function of the plugin!).
 
 From the widget you can:
- * select a points layer
- * click on the desired position, in orthoslice view you will see the red viewfinder (red cross) move to that position
- * Click on `Add point` to add a point at that position.
+ * Select a points layer
+ * Click on the desired position, in orthoslice view you will see the red viewfinder (red cross) move to that position
+ * Click on `Add point` to add a point at that position
 
 Inference phase
 ---------------
