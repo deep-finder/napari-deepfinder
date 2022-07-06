@@ -19,10 +19,12 @@ def denoise_widget(
     Widget to denoise an image layer.
     When activated adds the denoised image layer on top of the old one and hides the old layer.
 
-    @param viewer: napari.viewer.Viewer
-    @param image_layer: napari.layers.Image
-    @param filter_size: int
-    @param activate_denoise: bool
+    Parameters
+    ----------
+    viewer : napari.viewer.Viewer
+    image_layer: napari.layers.Image
+    filter_size: int
+    activate_denoise: bool
     """
     # Initialisation
     if not hasattr(denoise_widget, 'denoised_layer'):
@@ -86,11 +88,15 @@ def denoise_widget(
 @magic_factory(auto_call=True, call_button="Reorder layers")
 def reorder_widget(viewer: 'napari.viewer.Viewer'):
     """Widget to reorder the layers respecting the following order from bottom to top:
-        - image
-        - labels
-        - points
-        - all other layer types
-        @param viewer: napari.viewer.Viewer"""
+        - Image
+        - Labels
+        - Points
+        - All other layer types
+
+    Parameters
+    ----------
+    viewer : napari.viewer.Viewer
+    """
     reorder(viewer)
 
 
