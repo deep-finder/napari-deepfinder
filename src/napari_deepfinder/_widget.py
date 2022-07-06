@@ -15,6 +15,15 @@ def denoise_widget(
         filter_size: int = 3,
         activate_denoise=False,
 ):
+    """
+    Widget to denoise an image layer.
+    When activated adds the denoised image layer on top of the old one and hides the old layer.
+
+    @param viewer: napari.viewer.Viewer
+    @param image_layer: napari.layers.Image
+    @param filter_size: int
+    @param activate_denoise: bool
+    """
     # Initialisation
     if not hasattr(denoise_widget, 'denoised_layer'):
         # persistant values initialisation
@@ -76,10 +85,20 @@ def denoise_widget(
 
 @magic_factory(auto_call=True, call_button="Reorder layers")
 def reorder_widget(viewer: 'napari.viewer.Viewer'):
+    """Widget to reorder the layers respecting the following order from bottom to top:
+        - image
+        - labels
+        - points
+        - all other layer types
+        @param viewer: napari.viewer.Viewer"""
     reorder(viewer)
 
 
 class AddPointsWidget(QWidget):
+    """
+    Widget to add points to layer.
+    This is especially designed for tomogram annotation in Orthoslice view.
+    """
     def __init__(self, napari_viewer: napari.Viewer):
         super().__init__()
         self.viewer = napari_viewer
