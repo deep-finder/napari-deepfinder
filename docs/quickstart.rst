@@ -7,7 +7,7 @@ A clean environment
 First of all you need a working installation of napari, you can refer to that webpage for more info https://napari.org/#installation .
 
 It is strongly recommended to work with virtual environments (such as virtualenv or conda).
-You can create a new environment especially for your work with `napari-deepfinder.
+You can create a new environment especially for your work with `napari-deepfinder`.
 This is really useful and advised, especially because `napari-deepfinder` will install a lot of dependencies (including deepfinder and it's dependencies).
 
 Installation of `napari-deepfinder`
