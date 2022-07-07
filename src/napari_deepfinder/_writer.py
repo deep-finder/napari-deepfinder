@@ -31,6 +31,10 @@ def write_annotations_xml(path: str, data: list):
 def write_labelmap(path: str, data: numpy.array, meta: dict):
     """Writer for labelmaps (segmentation maps)"""
     array_label = np.transpose(data, (2, 1, 0))
+    type_list = ['int8', 'int16', 'uint8', 'uint16']
+    # If the labelmap array is not in a correct type, cast to int8
+    if array_label.dtype not in type_list:
+        array_label = array_label.astype('int8')
     if path[-4:] == '.mrc':
         cm.write_array(array_label, path)
         return path
