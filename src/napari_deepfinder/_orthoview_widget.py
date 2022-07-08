@@ -1,10 +1,9 @@
-import napari
-import napari.layers
+from napari import Viewer, layers
+from napari.settings import SETTINGS
 import numpy as np
 from typing import Optional
 from qtpy.QtWidgets import QWidget, QHBoxLayout, QDesktopWidget, QCheckBox
 from qtpy import QtCore
-from napari.settings import SETTINGS
 
 
 # TODO: add "scroll bar" sync
@@ -12,18 +11,18 @@ from napari.settings import SETTINGS
 class Orthoslice(QWidget):
     """Orthoslice widget"""
 
-    def __init__(self, viewer: napari.Viewer):
+    def __init__(self, viewer: Viewer):
         super().__init__()
         self.main_view = viewer
         self.x_max: Optional[int] = None
         self.y_max: Optional[int] = None
         self.z_max: Optional[int] = None
         self.old_layer_names: Optional[list[str]] = []
-        self.xz_view: Optional[napari.Viewer] = None
-        self.yz_view: Optional[napari.Viewer] = None
-        self.viewfinder_xz: Optional[napari.layers.Layer] = None
-        self.viewfinder_xy: Optional[napari.layers.Layer] = None
-        self.viewfinder_yz: Optional[napari.layers.Layer] = None
+        self.xz_view: Optional[Viewer] = None
+        self.yz_view: Optional[Viewer] = None
+        self.viewfinder_xz: Optional[layers.Layer] = None
+        self.viewfinder_xy: Optional[layers.Layer] = None
+        self.viewfinder_yz: Optional[layers.Layer] = None
         self.x: Optional[float] = None
         self.y: Optional[float] = None
         self.z: Optional[float] = None
@@ -35,7 +34,6 @@ class Orthoslice(QWidget):
         # Don't set init width too low, otherwise the lines might "disappear" sometimes
         self.init_width = 2.5
         # Graphical part
-        # self.checkbox = Checkbox(text='Orthoslice')
         self.checkbox = QCheckBox('Orthoslice')
         self.checkbox.setChecked(False)
         self.checkbox.clicked.connect(self._on_click_checkbox)
@@ -63,7 +61,7 @@ class Orthoslice(QWidget):
                 self.end_ortho()
                 self.running = False
 
-    def mouse_click_drag(self, viewer: napari.Viewer, event):
+    def mouse_click_drag(self, viewer: Viewer, event):
         old_camera = viewer.camera.copy()
         dragged = False
         yield
@@ -153,7 +151,7 @@ class Orthoslice(QWidget):
         self.viewfinder_xy.refresh()
         self.viewfinder_yz.refresh()
 
-    def mouse_drag(self, viewer: napari.Viewer, event, old_camera):
+    def mouse_drag(self, viewer: Viewer, event, old_camera):
         xyz_l = viewer.camera.center
         diff = np.array(xyz_l) - np.array(old_camera.center)
         dragged_viewer_order = viewer.dims.order
@@ -316,9 +314,9 @@ class Orthoslice(QWidget):
         height = geom.height() // 2
         width = geom.width() // 2
         SETTINGS.application.window_size = (width, height)
-        self.xz_view = napari.Viewer(title='xz', order=[1, 0, 2])
+        self.xz_view = Viewer(title='xz', order=[1, 0, 2])
         self.xz_view.window.qt_viewer.set_welcome_visible(False)
-        self.yz_view = napari.Viewer(title='yz', order=[0, 1, 2])
+        self.yz_view = Viewer(title='yz', order=[0, 1, 2])
         self.yz_view.window.qt_viewer.set_welcome_visible(False)
 
         # Hide layer list and controls in secondary viewers, Future warning!!
@@ -427,9 +425,9 @@ class Orthoslice(QWidget):
 
     def layer_inserted(self, event):
         layer_inserted = event.value
-        image = napari.layers.image.image.Image
-        points = napari.layers.points.points.Points
-        labels = napari.layers.labels.labels.Labels
+        image = layers.image.image.Image
+        points = layers.points.points.Points
+        labels = layers.labels.labels.Labels
         if (
                 isinstance(layer_inserted, image)
                 or isinstance(layer_inserted, points)
@@ -453,7 +451,7 @@ class Orthoslice(QWidget):
                 self.main_view.layers.events.removed.disconnect(self.layer_removed)
                 self.main_view.layers.selection.events.changed.disconnect(self.layer_selection)
                 for viewer in self.viewer_list:
-                    dummy = napari.layers.Layer.create(np.zeros((1, 1, 1)), {'name': 'dummy'}, layer_type='image')
+                    dummy = layers.Layer.create(np.zeros((1, 1, 1)), {'name': 'dummy'}, layer_type='image')
                     viewer.layers.insert(nb_layers - 2, dummy)
                     viewer.layers.remove(viewer.layers[nb_layers - 2])
                 self.main_view.layers.selection.events.changed.connect(self.layer_selection, position='last')
@@ -494,11 +492,11 @@ class Orthoslice(QWidget):
             self.main_view.layers.move(index_0, nb_layers)
             self.old_layer_names = [layer.name for layer in self.main_view.layers]
 
-    def sync_layer(self, event, init=False, layer: Optional[napari.layers.Layer] = None, insert=False,
+    def sync_layer(self, event, init=False, layer: Optional[layers.Layer] = None, insert=False,
                    index: Optional[int] = None):
-        image = napari.layers.image.image.Image
-        points = napari.layers.points.points.Points
-        labels = napari.layers.labels.labels.Labels
+        image = layers.image.image.Image
+        points = layers.points.points.Points
+        labels = layers.labels.labels.Labels
         secondary_viewers = [self.xz_view, self.yz_view]
         if not init:
             layer = event.source
@@ -515,7 +513,7 @@ class Orthoslice(QWidget):
                     name = layer.name
                     data = layer.data
                     if insert:
-                        layer_tmp = napari.layers.Layer.create(data, {'name': name}, layer_type='image')
+                        layer_tmp = layers.Layer.create(data, {'name': name}, layer_type='image')
                         view.layers.insert(index, layer_tmp)
                     else:
                         view.add_image(data, name=name)
@@ -541,7 +539,7 @@ class Orthoslice(QWidget):
                     face_color = layer.face_color
                     out_of_slice_display = layer.out_of_slice_display
                     if insert:
-                        layer_tmp = napari.layers.Layer.create(data, {'name': name, 'ndim': 3}, layer_type='points')
+                        layer_tmp = layers.Layer.create(data, {'name': name, 'ndim': 3}, layer_type='points')
                         view.layers.insert(index, layer_tmp)
                     else:
                         view.add_points(data,
@@ -568,7 +566,7 @@ class Orthoslice(QWidget):
                     name = layer.name
                     data = layer.data
                     if insert:
-                        layer_tmp = napari.layers.Layer.create(data, {'name': name}, layer_type='labels')
+                        layer_tmp = layers.Layer.create(data, {'name': name}, layer_type='labels')
                         view.layers.insert(index, layer_tmp)
                     else:
                         view.add_labels(data, name=name)
