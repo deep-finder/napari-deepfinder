@@ -311,10 +311,6 @@ class Orthoslice(QWidget):
                                    edge_width=self.init_width / self.gen_zoom_factor)
         self.viewfinder_xy = self.main_view.layers[-1]
 
-        self.main_view.mouse_drag_callbacks.append(self.mouse_click_drag)
-        # zoom is now handled by zoom event!
-        # self.main_view.mouse_wheel_callbacks.append(self.zoom)
-
         # set window size
         geom = QDesktopWidget().availableGeometry()
         height = geom.height() // 2
@@ -333,6 +329,10 @@ class Orthoslice(QWidget):
         # Remove menu bar in secondary viewers
         self.xz_view.window.main_menu.close()
         self.yz_view.window.main_menu.close()
+
+        self.main_view.mouse_drag_callbacks.append(self.mouse_click_drag)
+        # zoom is now handled by zoom event!
+        # self.main_view.mouse_wheel_callbacks.append(self.zoom)
 
         self.xz_view.mouse_drag_callbacks.append(self.mouse_click_drag)
         # zoom is now handled by zoom event!
@@ -370,8 +370,17 @@ class Orthoslice(QWidget):
         self.main_view.layers.events.removed.connect(self.layer_removed)
         self.main_view.layers.events.inserted.connect(self.layer_inserted, position="last")
         self.main_view.layers.events.reordered.connect(self.layer_reordered)
-        # Sync zoom factors
+
+        # force viewers cameras to be centered
+        # disconnect zoom to be able to set centers, without the setting of the center interfering
+        self.disconnect_zoom()
+        self.main_view.camera.center = (0, self.main_view.layers[-2].data.shape[1] // 2, self.main_view.layers[-2].data.shape[0] // 2)
+        self.yz_view.camera.center = (0, self.main_view.layers[-2].data.shape[1] // 2, self.main_view.layers[-2].data.shape[2] // 2)
+        self.xz_view.camera.center = (0, self.main_view.layers[-2].data.shape[2] // 2, self.main_view.layers[-2].data.shape[0] // 2)
+        # Now synchronise zoom factors and update viewfinders!
         self.connect_zoom()
+        self.update_viewfinders()
+
         # Place windows
         self.place_windows()
 
