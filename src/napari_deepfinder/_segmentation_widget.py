@@ -137,6 +137,8 @@ class SegmentationWidget(QWidget):
 
         # Segment data:
         scoremaps = seg.launch(self.data)
+        with open('/home/caronsso/test_scoremaps.npy', 'wb') as f:
+            np.save(f, scoremaps)
 
         seg.display('Saving labelmap ...')
         # Get labelmap from scoremaps and save:
