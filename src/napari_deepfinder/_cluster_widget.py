@@ -125,7 +125,7 @@ class ClusterWidget(QWidget):
         return path_objl
 
     def add_cluster(self, path):
-        self.viewer.open(path)
+        self.viewer.open(path, plugin='napari-deepfinder')
         self._launch_clustering.setEnabled(True)
 
     def _run(self):
