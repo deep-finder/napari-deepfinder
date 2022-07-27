@@ -1,0 +1,12 @@
+labels:
+  ontology: EDAM-BIOIMAGING:alpha06
+  terms:
+    - Electron cryotomography
+    - 3D image
+    - Visualisation
+    - Image annotation
+    - Image segmentation
+    - Model-based segmentation
+    - Convolutional neural network
+    - Supervised learning
+    - Clustering
