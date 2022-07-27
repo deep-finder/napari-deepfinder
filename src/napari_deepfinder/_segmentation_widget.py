@@ -69,6 +69,16 @@ class SegmentationWidget(QWidget):
         self.box_output.addWidget(browse_btn_output, 0, 3, 1, 1, QtCore.Qt.AlignTop)
         self.bin_label_map = QCheckBox("Bin label map")
         self.box_output.addWidget(self.bin_label_map, 1, 0, QtCore.Qt.AlignTop)
+        # add scoremaps toggle
+        self.scoremaps_out = QCheckBox("Save scoremaps")
+        self.box_output.addWidget(self.scoremaps_out, 1, 0, QtCore.Qt.AlignTop)
+        # add scoremaps path chooser
+        self.box_output.addWidget(QLabel('Scoremaps path:'), 0, 0, QtCore.Qt.AlignTop)
+        self.scoremaps_path = QLineEdit()
+        self.box_output.addWidget(self.scoremaps_path, 0, 1, 1, 2, QtCore.Qt.AlignTop)
+        browse_btn_scoremaps = QPushButton('...')
+        browse_btn_scoremaps.released.connect(self.browse_output_scoremaps)
+        self.box_output.addWidget(browse_btn_scoremaps, 0, 3, 1, 1, QtCore.Qt.AlignTop)
         self.group_output.setLayout(self.box_output)
         self.layout().addWidget(self.group_output)
         # Launch
@@ -101,6 +111,16 @@ class SegmentationWidget(QWidget):
         else:
             print("No file selected")
 
+    def browse_output_scoremaps(self):
+        """Callback called when the browse scoremaps output button is clicked"""
+        file = QFileDialog.getSaveFileName(self, "Save file", "", "*.npy")
+        if file[0] != "":
+            if file[0][-4:] == '.npy':
+                self.scoremaps_path.setText(file[0])
+            else:
+                self.scoremaps_path.setText(file[0]+'.npy')
+        else:
+            print("No file selected")
 
     @QtCore.Slot(str)
     def on_print_signal(self, message):  # is called when signal is emmited. Signal passes str 'message' to slot
@@ -137,8 +157,12 @@ class SegmentationWidget(QWidget):
 
         # Segment data:
         scoremaps = seg.launch(self.data)
-        with open('/home/caronsso/test_scoremaps.npy', 'wb') as f:
-            np.save(f, scoremaps)
+
+        # output scoremaps if requested (useful for distance map)
+        if self.scoremaps_out.isChecked():
+            with open(self.path_scoremaps, 'wb') as f:
+                np.save(f, scoremaps)
+            self.viewer.add_image(scoremaps)
 
         seg.display('Saving labelmap ...')
         # Get labelmap from scoremaps and save:
