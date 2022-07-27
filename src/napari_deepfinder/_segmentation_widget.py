@@ -20,6 +20,7 @@ class SegmentationWidget(QWidget):
         self.viewer = napari_viewer
 
         self.labelmap = None
+        self.scoremaps = None
 
         self.print_signal.connect(self.on_print_signal)
 
@@ -71,14 +72,14 @@ class SegmentationWidget(QWidget):
         self.box_output.addWidget(self.bin_label_map, 1, 0, QtCore.Qt.AlignTop)
         # add scoremaps toggle
         self.scoremaps_out = QCheckBox("Save scoremaps")
-        self.box_output.addWidget(self.scoremaps_out, 1, 0, QtCore.Qt.AlignTop)
+        self.box_output.addWidget(self.scoremaps_out, 2, 0, QtCore.Qt.AlignTop)
         # add scoremaps path chooser
-        self.box_output.addWidget(QLabel('Scoremaps path:'), 0, 0, QtCore.Qt.AlignTop)
+        self.box_output.addWidget(QLabel('Scoremaps path:'), 3, 0, QtCore.Qt.AlignTop)
         self.scoremaps_path = QLineEdit()
-        self.box_output.addWidget(self.scoremaps_path, 0, 1, 1, 2, QtCore.Qt.AlignTop)
+        self.box_output.addWidget(self.scoremaps_path, 3, 1, 1, 2, QtCore.Qt.AlignTop)
         browse_btn_scoremaps = QPushButton('...')
         browse_btn_scoremaps.released.connect(self.browse_output_scoremaps)
-        self.box_output.addWidget(browse_btn_scoremaps, 0, 3, 1, 1, QtCore.Qt.AlignTop)
+        self.box_output.addWidget(browse_btn_scoremaps, 3, 3, 1, 1, QtCore.Qt.AlignTop)
         self.group_output.setLayout(self.box_output)
         self.layout().addWidget(self.group_output)
         # Launch
@@ -156,17 +157,16 @@ class SegmentationWidget(QWidget):
         seg.set_observer(core.observer_gui(self.print_signal))
 
         # Segment data:
-        scoremaps = seg.launch(self.data)
+        self.scoremaps = seg.launch(self.data)
 
         # output scoremaps if requested (useful for distance map)
         if self.scoremaps_out.isChecked():
-            with open(self.path_scoremaps, 'wb') as f:
-                np.save(f, scoremaps)
-            self.viewer.add_image(scoremaps)
+            with open(self.scoremaps_path.text(), 'wb') as f:
+                np.save(f, self.scoremaps)
 
         seg.display('Saving labelmap ...')
         # Get labelmap from scoremaps and save:
-        labelmap_not_converted = sm.to_labelmap(scoremaps)
+        labelmap_not_converted = sm.to_labelmap(self.scoremaps)
         # invert axes from z,y,x to x,y,z (weird convention)
         self.labelmap = np.transpose(labelmap_not_converted, (2, 1, 0))
         cm.write_array(self.labelmap, path_lmap)
@@ -174,7 +174,7 @@ class SegmentationWidget(QWidget):
         # Get binned labelmap and save:
         if self.bin_label_map.isChecked():
             s = os.path.splitext(path_lmap)
-            scoremapsB = sm.bin(scoremaps)
+            scoremapsB = sm.bin(self.scoremaps)
             labelmapB_not_converted = sm.to_labelmap(scoremapsB)
             # invert axes from z,y,x to x,y,z (weird convention)
             labelmapB = np.transpose(labelmapB_not_converted, (2, 1, 0))
@@ -185,6 +185,8 @@ class SegmentationWidget(QWidget):
 
     def add_labels(self, labelmap):
         self.viewer.add_labels(labelmap)
+        # quick fix to also add scoremaps to the viewer outside of the thread
+        self.viewer.add_image(self.scoremaps)
         self._launch_segmentation.setEnabled(True)
 
     def _run(self):
