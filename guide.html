@@ -14,7 +14,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
@@ -78,8 +77,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Guide</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Guide</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/guide.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,11 +89,11 @@
            <div itemprop="articleBody">
              
   <section id="guide">
-<h1>Guide<a class="headerlink" href="#guide" title="Permalink to this heading"></a></h1>
+<h1>Guide<a class="headerlink" href="#guide" title="Permalink to this headline"></a></h1>
 <section id="general-purpose-visualisation">
-<h2>General purpose visualisation<a class="headerlink" href="#general-purpose-visualisation" title="Permalink to this heading"></a></h2>
+<h2>General purpose visualisation<a class="headerlink" href="#general-purpose-visualisation" title="Permalink to this headline"></a></h2>
 <section id="open-files">
-<h3>Open files<a class="headerlink" href="#open-files" title="Permalink to this heading"></a></h3>
+<h3>Open files<a class="headerlink" href="#open-files" title="Permalink to this headline"></a></h3>
 <p>Once <cite>napari-deepfinder</cite> is installed, you will be able to open the files associated with the cryo-et workflow:</p>
 <ul class="simple">
 <li><p>Tomograms and segmentation maps as <cite>.mrc</cite>, <cite>.map</cite>, <cite>.rec</cite>, <cite>.h5</cite>, <cite>.tif</cite> or <cite>.TIF</cite></p></li>
@@ -108,12 +107,12 @@ Click on the desired widget of this list to enable or disable it!</p>
 </div>
 </section>
 <section id="automatic-reordering-of-layers">
-<h3>Automatic reordering of layers<a class="headerlink" href="#automatic-reordering-of-layers" title="Permalink to this heading"></a></h3>
+<h3>Automatic reordering of layers<a class="headerlink" href="#automatic-reordering-of-layers" title="Permalink to this headline"></a></h3>
 <p>A small widget has been added to reorder the layers automatically to have the tomograms at the bottom and superpose the segmentation map and the points annotations as a last layer.
 Correctly ordered layers simplify the visualisation.</p>
 </section>
 <section id="orthoslice-view-useful-for-annotation">
-<h3>Orthoslice view (useful for annotation)<a class="headerlink" href="#orthoslice-view-useful-for-annotation" title="Permalink to this heading"></a></h3>
+<h3>Orthoslice view (useful for annotation)<a class="headerlink" href="#orthoslice-view-useful-for-annotation" title="Permalink to this headline"></a></h3>
 <p>Enable the <cite>Orthoslice view</cite> widget and activate the <cite>Orthoslice</cite> checkbox to start the orthoslice viewer.
 You will now see 3 synchronised viewer (the main <cite>x,y</cite> viewer and 2 secondary <cite>x, z</cite> and <cite>z, y</cite> viewer).</p>
 <div class="admonition important">
@@ -123,19 +122,19 @@ You will now see 3 synchronised viewer (the main <cite>x,y</cite> viewer and 2 s
 </div>
 </section>
 <section id="denoising-useful-for-annotation">
-<h3>Denoising (useful for annotation)<a class="headerlink" href="#denoising-useful-for-annotation" title="Permalink to this heading"></a></h3>
+<h3>Denoising (useful for annotation)<a class="headerlink" href="#denoising-useful-for-annotation" title="Permalink to this headline"></a></h3>
 <p>The <cite>Denoise tomogram</cite> widget is for visualisation purposes only.
 You can choose the image layer (tomogram) you want to denoise and the filter size (mean filter) you want to use.</p>
 </section>
 </section>
 <section id="before-training-phase-annotation">
-<h2>Before-training phase (annotation)<a class="headerlink" href="#before-training-phase-annotation" title="Permalink to this heading"></a></h2>
+<h2>Before-training phase (annotation)<a class="headerlink" href="#before-training-phase-annotation" title="Permalink to this headline"></a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The proper training of the neural network does not happen in this plugin</p>
 </div>
 <section id="annotation-of-points">
-<h3>Annotation of points<a class="headerlink" href="#annotation-of-points" title="Permalink to this heading"></a></h3>
+<h3>Annotation of points<a class="headerlink" href="#annotation-of-points" title="Permalink to this headline"></a></h3>
 <p>A basic <cite>Annotation</cite> widget is available, with some included information banner.
 For each points annotation class, you need to create a points layer in napari and respect a naming convention that is explained inside the plugin.</p>
 <p>This widget is designed for the orthoslice view and is not needed for annotation in non-orthoslice view
@@ -151,13 +150,13 @@ For each points annotation class, you need to create a points layer in napari an
 </section>
 </section>
 <section id="inference-phase">
-<h2>Inference phase<a class="headerlink" href="#inference-phase" title="Permalink to this heading"></a></h2>
+<h2>Inference phase<a class="headerlink" href="#inference-phase" title="Permalink to this headline"></a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>This phase is only possible once DeepFinder has been trained, training does not happen in this plugin.</p>
 </div>
 <section id="segmentation">
-<h3>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this heading"></a></h3>
+<h3>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline"></a></h3>
 <p>The <cite>Segmentation</cite> widget serves as a graphical user interface to generate a segmentation map based on the trained DeepFinder model.
 You need to select the file containing the weights of the network and set other parameters.
 Those parameters are mostly explained here: <a class="reference external" href="https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation">https://deepfinder.readthedocs.io/en/latest/guide.html#segmentation</a>.</p>
@@ -169,7 +168,7 @@ not too low to gain time, and not too high because it might lead in <cite>out of
 </div>
 </section>
 <section id="clustering">
-<h3>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading"></a></h3>
+<h3>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline"></a></h3>
 <p>The <cite>Clustering</cite> widget enables to obtain the points/the centroids of some macromolecules based on the segmentation map.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>

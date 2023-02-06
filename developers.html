@@ -14,7 +14,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
@@ -71,8 +70,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Developers</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Developers</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/developers.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,9 +82,9 @@
            <div itemprop="articleBody">
              
   <section id="developers">
-<h1>Developers<a class="headerlink" href="#developers" title="Permalink to this heading"></a></h1>
+<h1>Developers<a class="headerlink" href="#developers" title="Permalink to this headline"></a></h1>
 <section id="module-napari_deepfinder._reader">
-<span id="readers"></span><h2>Readers<a class="headerlink" href="#module-napari_deepfinder._reader" title="Permalink to this heading"></a></h2>
+<span id="readers"></span><h2>Readers<a class="headerlink" href="#module-napari_deepfinder._reader" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="napari_deepfinder._reader.napari_get_reader">
 <span class="sig-prename descclassname"><span class="pre">napari_deepfinder._reader.</span></span><span class="sig-name descname"><span class="pre">napari_get_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._reader.napari_get_reader" title="Permalink to this definition"></a></dt>
@@ -125,7 +124,7 @@ layer_type==”image” if not provided</p>
 
 </section>
 <section id="module-napari_deepfinder._writer">
-<span id="writers"></span><h2>Writers<a class="headerlink" href="#module-napari_deepfinder._writer" title="Permalink to this heading"></a></h2>
+<span id="writers"></span><h2>Writers<a class="headerlink" href="#module-napari_deepfinder._writer" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="napari_deepfinder._writer.write_annotations_xml">
 <span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_annotations_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_annotations_xml" title="Permalink to this definition"></a></dt>
@@ -134,21 +133,21 @@ layer_type==”image” if not provided</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="napari_deepfinder._writer.write_labelmap">
-<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_labelmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_labelmap" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_labelmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_labelmap" title="Permalink to this definition"></a></dt>
 <dd><p>Writer for labelmaps (segmentation maps)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="napari_deepfinder._writer.write_tomogram">
-<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_tomogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_tomogram" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_tomogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_tomogram" title="Permalink to this definition"></a></dt>
 <dd><p>Writer for tomograms</p>
 </dd></dl>
 
 </section>
 <section id="widgets">
-<h2>Widgets<a class="headerlink" href="#widgets" title="Permalink to this heading"></a></h2>
+<h2>Widgets<a class="headerlink" href="#widgets" title="Permalink to this headline"></a></h2>
 <section id="reorder-layers">
-<h3>Reorder layers<a class="headerlink" href="#reorder-layers" title="Permalink to this heading"></a></h3>
+<h3>Reorder layers<a class="headerlink" href="#reorder-layers" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="napari_deepfinder._widget.reorder_widget">
 <span class="sig-prename descclassname"><span class="pre">napari_deepfinder._widget.</span></span><span class="sig-name descname"><span class="pre">reorder_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._widget.reorder_widget" title="Permalink to this definition"></a></dt>
@@ -201,7 +200,7 @@ again with <code class="docutils literal notranslate"><span class="pre">persist<
 
 </section>
 <section id="denoising">
-<h3>Denoising<a class="headerlink" href="#denoising" title="Permalink to this heading"></a></h3>
+<h3>Denoising<a class="headerlink" href="#denoising" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="napari_deepfinder._widget.denoise_widget">
 <span class="sig-prename descclassname"><span class="pre">napari_deepfinder._widget.</span></span><span class="sig-name descname"><span class="pre">denoise_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._widget.denoise_widget" title="Permalink to this definition"></a></dt>
@@ -254,20 +253,20 @@ again with <code class="docutils literal notranslate"><span class="pre">persist<
 
 </section>
 <section id="annotation">
-<h3>Annotation<a class="headerlink" href="#annotation" title="Permalink to this heading"></a></h3>
+<h3>Annotation<a class="headerlink" href="#annotation" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="napari_deepfinder._widget.AddPointsWidget">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._widget.</span></span><span class="sig-name descname"><span class="pre">AddPointsWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._widget.AddPointsWidget" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._widget.</span></span><span class="sig-name descname"><span class="pre">AddPointsWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">napari.viewer.Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._widget.AddPointsWidget" title="Permalink to this definition"></a></dt>
 <dd><p>Widget to add points to layer.
 This is especially designed for tomogram annotation in Orthoslice view.</p>
 </dd></dl>
 
 </section>
 <section id="module-napari_deepfinder._segmentation_widget">
-<span id="segmentation"></span><h3>Segmentation<a class="headerlink" href="#module-napari_deepfinder._segmentation_widget" title="Permalink to this heading"></a></h3>
+<span id="segmentation"></span><h3>Segmentation<a class="headerlink" href="#module-napari_deepfinder._segmentation_widget" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._segmentation_widget.</span></span><span class="sig-name descname"><span class="pre">SegmentationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._segmentation_widget.</span></span><span class="sig-name descname"><span class="pre">SegmentationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">napari.viewer.Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget.browse_output">
 <span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget.browse_output" title="Permalink to this definition"></a></dt>
@@ -284,10 +283,10 @@ This is especially designed for tomogram annotation in Orthoslice view.</p>
 
 </section>
 <section id="module-napari_deepfinder._cluster_widget">
-<span id="clustering"></span><h3>Clustering<a class="headerlink" href="#module-napari_deepfinder._cluster_widget" title="Permalink to this heading"></a></h3>
+<span id="clustering"></span><h3>Clustering<a class="headerlink" href="#module-napari_deepfinder._cluster_widget" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="napari_deepfinder._cluster_widget.ClusterWidget">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._cluster_widget.</span></span><span class="sig-name descname"><span class="pre">ClusterWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._cluster_widget.ClusterWidget" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._cluster_widget.</span></span><span class="sig-name descname"><span class="pre">ClusterWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">napari.viewer.Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._cluster_widget.ClusterWidget" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="napari_deepfinder._cluster_widget.ClusterWidget.browse_output">
 <span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._cluster_widget.ClusterWidget.browse_output" title="Permalink to this definition"></a></dt>
