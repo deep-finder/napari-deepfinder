@@ -265,7 +265,7 @@ class Orthoslice(QWidget):
         return False
 
     def place_windows(self):
-        self.xz_view.dims._transpose()
+        self.xz_view.dims.transpose()
         geom = QDesktopWidget().availableGeometry()
         height = geom.height() // 2
         width = geom.width() // 2
@@ -353,7 +353,7 @@ class Orthoslice(QWidget):
         self.xz_view.dims.order = [1, 0, 2]
         self.yz_view.dims.order = [0, 1, 2]
         # fix weird bug in axis display order (y,x) instead of (x,y) of main viewer
-        self.main_view.dims._transpose()
+        self.main_view.dims.transpose()
 
         self.xz_view.camera.zoom = self.gen_zoom_factor
         self.yz_view.camera.zoom = self.gen_zoom_factor
