@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'napari-deepfinder'
-copyright = u'2022, napari-deepfinder'
+copyright = u'2023, napari-deepfinder'
 author = u'Constantin Aronssohn'
 
 # The version info for the project you're documenting, acts as replacement for
