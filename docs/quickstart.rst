@@ -35,6 +35,3 @@ or (for the latest development version):
 .. raw:: html
 
    </details>
-
-Introduction tutorial
----------------------
