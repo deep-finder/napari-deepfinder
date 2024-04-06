@@ -50,14 +50,38 @@
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Getting help</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#readers">Readers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writers">Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-napari_deepfinder._reader">Readers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#napari_deepfinder._reader.napari_get_reader"><code class="docutils literal notranslate"><span class="pre">napari_get_reader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#napari_deepfinder._reader.reader_function"><code class="docutils literal notranslate"><span class="pre">reader_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-napari_deepfinder._writer">Writers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#napari_deepfinder._writer.write_annotations_xml"><code class="docutils literal notranslate"><span class="pre">write_annotations_xml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#napari_deepfinder._writer.write_labelmap"><code class="docutils literal notranslate"><span class="pre">write_labelmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#napari_deepfinder._writer.write_tomogram"><code class="docutils literal notranslate"><span class="pre">write_tomogram()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#widgets">Widgets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reorder-layers">Reorder layers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#denoising">Denoising</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#annotation">Annotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#segmentation">Segmentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clustering">Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reorder-layers">Reorder layers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#napari_deepfinder._widget.reorder_widget"><code class="docutils literal notranslate"><span class="pre">reorder_widget()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#denoising">Denoising</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#napari_deepfinder._widget.denoise_widget"><code class="docutils literal notranslate"><span class="pre">denoise_widget()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation">Annotation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#napari_deepfinder._widget.AddPointsWidget"><code class="docutils literal notranslate"><span class="pre">AddPointsWidget</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-napari_deepfinder._segmentation_widget">Segmentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#napari_deepfinder._segmentation_widget.SegmentationWidget"><code class="docutils literal notranslate"><span class="pre">SegmentationWidget</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-napari_deepfinder._cluster_widget">Clustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#napari_deepfinder._cluster_widget.ClusterWidget"><code class="docutils literal notranslate"><span class="pre">ClusterWidget</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -90,28 +114,246 @@
              
   <section id="developers">
 <h1>Developers<a class="headerlink" href="#developers" title="Link to this heading"></a></h1>
-<section id="readers">
-<h2>Readers<a class="headerlink" href="#readers" title="Link to this heading"></a></h2>
+<section id="module-napari_deepfinder._reader">
+<span id="readers"></span><h2>Readers<a class="headerlink" href="#module-napari_deepfinder._reader" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._reader.napari_get_reader">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._reader.</span></span><span class="sig-name descname"><span class="pre">napari_get_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._reader.napari_get_reader" title="Link to this definition"></a></dt>
+<dd><p>A basic implementation of a Reader contribution.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>path<span class="classifier">str or list of str</span></dt><dd><p>Path to file, or list of paths.</p>
+</dd>
+</dl>
 </section>
-<section id="writers">
-<h2>Writers<a class="headerlink" href="#writers" title="Link to this heading"></a></h2>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>function or None</dt><dd><p>If the path is a recognized format, return a function that accepts the
+same path or list of paths, and returns a list of layer data tuples.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._reader.reader_function">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._reader.</span></span><span class="sig-name descname"><span class="pre">reader_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._reader.reader_function" title="Link to this definition"></a></dt>
+<dd><p>Take a path or list of paths and return a list of LayerData tuples.</p>
+<p>Readers are expected to return data as a list of tuples, where each tuple
+is (data, [add_kwargs, [layer_type]]), “add_kwargs” and “layer_type” are
+both optional.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>path<span class="classifier">str or list of str</span></dt><dd><p>Path to file, or list of paths.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>layer_data<span class="classifier">list of tuples</span></dt><dd><p>A list of LayerData tuples where each tuple in the list contains
+(data, metadata, layer_type), where data is a numpy array, metadata is
+a dict of keyword arguments for the corresponding viewer.add_* method
+in napari, and layer_type is a lower-case string naming the type of layer.
+Both “meta”, and “layer_type” are optional. napari will default to
+layer_type==”image” if not provided</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-napari_deepfinder._writer">
+<span id="writers"></span><h2>Writers<a class="headerlink" href="#module-napari_deepfinder._writer" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._writer.write_annotations_xml">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_annotations_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_annotations_xml" title="Link to this definition"></a></dt>
+<dd><p>Writer for annotations in for of a xml object list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._writer.write_labelmap">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_labelmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_labelmap" title="Link to this definition"></a></dt>
+<dd><p>Writer for labelmaps (segmentation maps)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._writer.write_tomogram">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._writer.</span></span><span class="sig-name descname"><span class="pre">write_tomogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._writer.write_tomogram" title="Link to this definition"></a></dt>
+<dd><p>Writer for tomograms</p>
+</dd></dl>
+
 </section>
 <section id="widgets">
 <h2>Widgets<a class="headerlink" href="#widgets" title="Link to this heading"></a></h2>
 <section id="reorder-layers">
 <h3>Reorder layers<a class="headerlink" href="#reorder-layers" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._widget.reorder_widget">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._widget.</span></span><span class="sig-name descname"><span class="pre">reorder_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._widget.reorder_widget" title="Link to this definition"></a></dt>
+<dd><p>Wrapper for a container of widgets representing a callable object.</p>
+<section id="id3">
+<h4>Parameters<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>function<span class="classifier">Callable</span></dt><dd><p>A callable to turn into a GUI</p>
+</dd>
+<dt>call_button<span class="classifier">bool | str | None, optional</span></dt><dd><p>If True, create an additional button that calls the original function when
+clicked.  If a <cite>str</cite>, set the button text. by default False when
+auto_call is True, and True otherwise.
+The button can be accessed from the <cite>.call_button</cite> property.</p>
+</dd>
+<dt>layout<span class="classifier">str, optional</span></dt><dd><p>The type of layout to use. Must be <cite>horizontal</cite> or <cite>vertical</cite>
+by default “horizontal”.</p>
+</dd>
+<dt>scrollable<span class="classifier">bool, optional</span></dt><dd><p>Whether to enable scroll bars or not. If enabled, scroll bars will
+only appear along the layout direction, not in both directions.</p>
+</dd>
+<dt>labels<span class="classifier">bool, optional</span></dt><dd><p>Whether labels are shown in the widget. by default True</p>
+</dd>
+<dt>tooltips<span class="classifier">bool, optional</span></dt><dd><p>Whether tooltips are shown when hovering over widgets. by default True</p>
+</dd>
+<dt>app<span class="classifier">Application | str | None, optional</span></dt><dd><p>A backend to use, by default <cite>None</cite> (use the default backend.)</p>
+</dd>
+<dt>visible<span class="classifier">bool, optional</span></dt><dd><p>Whether to immediately show the widget.  If <cite>False</cite>, widget is explicitly
+hidden.  If <cite>None</cite>, widget is not shown, but will be shown if a parent
+container is shown, by default None.</p>
+</dd>
+<dt>auto_call<span class="classifier">bool, optional</span></dt><dd><p>If True, changing any parameter in either the GUI or the widget attributes
+will call the original function with the current settings. by default False</p>
+</dd>
+<dt>result_widget<span class="classifier">bool, optional</span></dt><dd><p>Whether to display a LineEdit widget the output of the function when called,
+by default False</p>
+</dd>
+<dt>param_options<span class="classifier">dict, optional</span></dt><dd><p>A dict of name: widget_options dict for each parameter in the function.
+Will be passed to <cite>magic_signature</cite> by default <cite>None</cite></p>
+</dd>
+<dt>name<span class="classifier">str, optional</span></dt><dd><p>A name to assign to the Container widget, by default <cite>function.__name__</cite></p>
+</dd>
+<dt>persist<span class="classifier">bool, optional</span></dt><dd><p>If <cite>True</cite>, when parameter values change in the widget, they will be stored to
+disk (in <cite>~/.config/magicgui/cache</cite>) and restored when the widget is loaded
+again with <cite>persist = True</cite>.  By default, <cite>False</cite>.</p>
+</dd>
+<dt>raise_on_unknown<span class="classifier">bool</span></dt><dd><p>If True, raise an error if a parameter annotation is not recognized.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h4>Raises<a class="headerlink" href="#raises" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If unexpected keyword arguments are provided</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
 </section>
 <section id="denoising">
 <h3>Denoising<a class="headerlink" href="#denoising" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="napari_deepfinder._widget.denoise_widget">
+<span class="sig-prename descclassname"><span class="pre">napari_deepfinder._widget.</span></span><span class="sig-name descname"><span class="pre">denoise_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._widget.denoise_widget" title="Link to this definition"></a></dt>
+<dd><p>Wrapper for a container of widgets representing a callable object.</p>
+<section id="id4">
+<h4>Parameters<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>function<span class="classifier">Callable</span></dt><dd><p>A callable to turn into a GUI</p>
+</dd>
+<dt>call_button<span class="classifier">bool | str | None, optional</span></dt><dd><p>If True, create an additional button that calls the original function when
+clicked.  If a <cite>str</cite>, set the button text. by default False when
+auto_call is True, and True otherwise.
+The button can be accessed from the <cite>.call_button</cite> property.</p>
+</dd>
+<dt>layout<span class="classifier">str, optional</span></dt><dd><p>The type of layout to use. Must be <cite>horizontal</cite> or <cite>vertical</cite>
+by default “horizontal”.</p>
+</dd>
+<dt>scrollable<span class="classifier">bool, optional</span></dt><dd><p>Whether to enable scroll bars or not. If enabled, scroll bars will
+only appear along the layout direction, not in both directions.</p>
+</dd>
+<dt>labels<span class="classifier">bool, optional</span></dt><dd><p>Whether labels are shown in the widget. by default True</p>
+</dd>
+<dt>tooltips<span class="classifier">bool, optional</span></dt><dd><p>Whether tooltips are shown when hovering over widgets. by default True</p>
+</dd>
+<dt>app<span class="classifier">Application | str | None, optional</span></dt><dd><p>A backend to use, by default <cite>None</cite> (use the default backend.)</p>
+</dd>
+<dt>visible<span class="classifier">bool, optional</span></dt><dd><p>Whether to immediately show the widget.  If <cite>False</cite>, widget is explicitly
+hidden.  If <cite>None</cite>, widget is not shown, but will be shown if a parent
+container is shown, by default None.</p>
+</dd>
+<dt>auto_call<span class="classifier">bool, optional</span></dt><dd><p>If True, changing any parameter in either the GUI or the widget attributes
+will call the original function with the current settings. by default False</p>
+</dd>
+<dt>result_widget<span class="classifier">bool, optional</span></dt><dd><p>Whether to display a LineEdit widget the output of the function when called,
+by default False</p>
+</dd>
+<dt>param_options<span class="classifier">dict, optional</span></dt><dd><p>A dict of name: widget_options dict for each parameter in the function.
+Will be passed to <cite>magic_signature</cite> by default <cite>None</cite></p>
+</dd>
+<dt>name<span class="classifier">str, optional</span></dt><dd><p>A name to assign to the Container widget, by default <cite>function.__name__</cite></p>
+</dd>
+<dt>persist<span class="classifier">bool, optional</span></dt><dd><p>If <cite>True</cite>, when parameter values change in the widget, they will be stored to
+disk (in <cite>~/.config/magicgui/cache</cite>) and restored when the widget is loaded
+again with <cite>persist = True</cite>.  By default, <cite>False</cite>.</p>
+</dd>
+<dt>raise_on_unknown<span class="classifier">bool</span></dt><dd><p>If True, raise an error if a parameter annotation is not recognized.</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h4>Raises<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If unexpected keyword arguments are provided</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
 </section>
 <section id="annotation">
 <h3>Annotation<a class="headerlink" href="#annotation" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder._widget.AddPointsWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._widget.</span></span><span class="sig-name descname"><span class="pre">AddPointsWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._widget.AddPointsWidget" title="Link to this definition"></a></dt>
+<dd><p>Widget to add points to layer.
+This is especially designed for tomogram annotation in Orthoslice view.</p>
+</dd></dl>
+
 </section>
-<section id="segmentation">
-<h3>Segmentation<a class="headerlink" href="#segmentation" title="Link to this heading"></a></h3>
+<section id="module-napari_deepfinder._segmentation_widget">
+<span id="segmentation"></span><h3>Segmentation<a class="headerlink" href="#module-napari_deepfinder._segmentation_widget" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._segmentation_widget.</span></span><span class="sig-name descname"><span class="pre">SegmentationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget" title="Link to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget.browse_output">
+<span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget.browse_output" title="Link to this definition"></a></dt>
+<dd><p>Callback called when the browse output button is clicked</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder._segmentation_widget.SegmentationWidget.browse_weights">
+<span class="sig-name descname"><span class="pre">browse_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._segmentation_widget.SegmentationWidget.browse_weights" title="Link to this definition"></a></dt>
+<dd><p>Callback called when the browse weights button is clicked</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="clustering">
-<h3>Clustering<a class="headerlink" href="#clustering" title="Link to this heading"></a></h3>
+<section id="module-napari_deepfinder._cluster_widget">
+<span id="clustering"></span><h3>Clustering<a class="headerlink" href="#module-napari_deepfinder._cluster_widget" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="napari_deepfinder._cluster_widget.ClusterWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">napari_deepfinder._cluster_widget.</span></span><span class="sig-name descname"><span class="pre">ClusterWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">napari_viewer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._cluster_widget.ClusterWidget" title="Link to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="napari_deepfinder._cluster_widget.ClusterWidget.browse_output">
+<span class="sig-name descname"><span class="pre">browse_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#napari_deepfinder._cluster_widget.ClusterWidget.browse_output" title="Link to this definition"></a></dt>
+<dd><p>Callback called when the browse output button is clicked</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 </section>
