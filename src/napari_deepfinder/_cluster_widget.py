@@ -5,7 +5,7 @@ import numpy as np
 import napari
 import napari.layers
 from napari.qt.threading import create_worker
-from deepfinder import Cluster
+from deepfinder.inference import Cluster
 from deepfinder.utils import core
 from deepfinder.utils import objl as ol
 

@@ -32,7 +32,7 @@ class Orthoslice(QWidget):
         self.old_cameras = None
         self.viewer_center_moved = None
         # Don't set init width too low, otherwise the lines might "disappear" sometimes
-        self.init_width = 2.5
+        self.init_width = 2.3
         # Graphical part
         self.checkbox = QCheckBox('Orthoslice')
         self.checkbox.setChecked(False)
@@ -306,6 +306,7 @@ class Orthoslice(QWidget):
 
         self.main_view.add_vectors(viewfinder_data_xy,
                                    name='viewfinder_xy',
+                                   vector_style='line',
                                    edge_width=self.init_width / self.gen_zoom_factor)
         self.viewfinder_xy = self.main_view.layers[-1]
 
@@ -342,11 +343,13 @@ class Orthoslice(QWidget):
 
         self.xz_view.add_vectors(viewfinder_data_xz,
                                  name='viewfinder_xz',
+                                 vector_style='line',
                                  edge_width=self.init_width / self.gen_zoom_factor)
         self.viewfinder_xz = self.xz_view.layers[-1]
 
         self.yz_view.add_vectors(viewfinder_data_yz,
                                  name='viewfinder_yz',
+                                 vector_style='line',
                                  edge_width=self.init_width / self.gen_zoom_factor)
         self.viewfinder_yz = self.yz_view.layers[-1]
 
@@ -372,9 +375,9 @@ class Orthoslice(QWidget):
         # force viewers cameras to be centered
         # disconnect zoom to be able to set centers, without the setting of the center interfering
         self.disconnect_zoom()
-        self.main_view.camera.center = (0, self.main_view.layers[-2].data.shape[1] // 2, self.main_view.layers[-2].data.shape[0] // 2)
-        self.yz_view.camera.center = (0, self.main_view.layers[-2].data.shape[1] // 2, self.main_view.layers[-2].data.shape[2] // 2)
-        self.xz_view.camera.center = (0, self.main_view.layers[-2].data.shape[2] // 2, self.main_view.layers[-2].data.shape[0] // 2)
+        self.main_view.camera.center = (self.z_max // 2, self.y_max // 2, self.x_max // 2)
+        self.yz_view.camera.center = (self.z_max //2, self.y_max // 2, self.x_max // 2)
+        self.xz_view.camera.center = (self.z_max //2, self.y_max // 2, self.x_max // 2)
         # Now synchronise zoom factors and update viewfinders!
         self.connect_zoom()
         self.update_viewfinders()
@@ -502,7 +505,7 @@ class Orthoslice(QWidget):
             layer = event.source
             # handle name change in a "dirty" way
             index = index_of_layer(self.main_view, layer)
-            if layer.name != self.old_layer_names[index]:
+            if index is not False and layer.name != self.old_layer_names[index]:
                 for view in secondary_viewers:
                     view.layers[index].name = layer.name
                 self.old_layer_names[index] = layer.name
@@ -575,14 +578,12 @@ class Orthoslice(QWidget):
                 view.layers[layer.name].opacity = layer.opacity
                 view.layers[layer.name].brush_size = layer.brush_size
                 view.layers[layer.name].blending = layer.blending
-                view.layers[layer.name].color_mode = layer.color_mode
+                view.layers[layer.name].colormap = layer.colormap
                 view.layers[layer.name].contour = layer.contour
                 view.layers[layer.name].n_edit_dimensions = layer.n_edit_dimensions
                 view.layers[layer.name].contiguous = layer.contiguous
                 view.layers[layer.name].preserve_labels = layer.preserve_labels
                 view.layers[layer.name].show_selected_label = layer.show_selected_label
-                view.layers[layer.name].color = layer.color
-                view.layers[layer.name].num_colors = layer.num_colors
                 view.layers[layer.name].visible = layer.visible
 
     def end_ortho(self):
@@ -598,6 +599,7 @@ class Orthoslice(QWidget):
         # remove layers and viewers
         self.xz_view.layers.remove(self.xz_view.layers[self.viewfinder_xz.name])
         self.yz_view.layers.remove(self.yz_view.layers[self.viewfinder_yz.name])
+        # Closing the viewers makes Napari menu crash, see https://github.com/napari/napari/issues/7588
         self.xz_view.close()
         self.yz_view.close()
         self.main_view.layers.remove(self.main_view.layers[self.viewfinder_xy.name])
