@@ -12,6 +12,15 @@ An orthoslice view has been added for an easier visualisation and annotation pro
 
 **The documentation for users is available [here](https://deep-finder.github.io/napari-deepfinder/).**
 
+> [!WARNING]
+>
+> An upstream bug in `napari` versions **≥ 0.5.0** causes the menu bar to break when closing the *Orthoslice view*.
+> 
+> See this issue for more details: https://github.com/napari/napari/issues/7588.
+> 
+> As a temporary workaround, you can use [napari v0.4.19](https://github.com/napari/napari/releases/tag/v0.4.19), which is not affected by this bug.
+
+
 ----------------------------------
 
 This [napari] plugin was generated with [Cookiecutter] using [@napari]'s [cookiecutter-napari-plugin] template.
