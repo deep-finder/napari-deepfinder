@@ -410,13 +410,30 @@ class Orthoslice(QWidget):
         for i in range(len(self.main_view.layers[:-1])):
             layer = self.main_view.layers[i]
             layer.events.connect(self.sync_layer)
+        # Lock name of viewfinders
+        self.viewfinder_xy.events.name.connect(self.keep_viewfinder_xy)
+        self.viewfinder_xz.events.name.connect(self.keep_viewfinder_xz)
+        self.viewfinder_yz.events.name.connect(self.keep_viewfinder_yz)
 
     def layer_disconnect(self):
         self.viewfinder_on_top()
         for i in range(len(self.main_view.layers[:-1])):
             layer = self.main_view.layers[i]
             layer.events.disconnect(self.sync_layer)
+        # Disconnect the name locking of viewfinders
+        self.viewfinder_xy.events.name.disconnect(self.keep_viewfinder_xy)
+        self.viewfinder_xz.events.name.disconnect(self.keep_viewfinder_xz)
+        self.viewfinder_yz.events.name.disconnect(self.keep_viewfinder_yz)
 
+    def keep_viewfinder_xy(self, event):
+        event.source.name = "viewfinder_xy"
+        
+    def keep_viewfinder_xz(self, event):
+        event.source.name = "viewfinder_xz"
+        
+    def keep_viewfinder_yz(self, event):
+        event.source.name = "viewfinder_yz"
+    
     def layer_removed(self, event):
         self.old_layer_names = [layer.name for layer in self.main_view.layers]
         layer_removed = event.value
@@ -505,7 +522,11 @@ class Orthoslice(QWidget):
             layer = event.source
             # handle name change in a "dirty" way
             index = index_of_layer(self.main_view, layer)
-            if index is not False and layer.name != self.old_layer_names[index]:
+            if (
+                index is not False  # The layer must be found in layers list!
+                and layer.name != self.old_layer_names[index]
+                and index != len(self.main_view.layers) - 1  # Do not change the name of the viewfinders!
+            ):
                 for view in secondary_viewers:
                     view.layers[index].name = layer.name
                 self.old_layer_names[index] = layer.name
