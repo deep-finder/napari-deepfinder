@@ -150,11 +150,11 @@ def test_orthoslice_click(make_napari_viewer, qtbot, Event):
     my_widget.checkbox.setChecked(True)
     my_widget._on_click_checkbox(True)
     # test start position
-    assert my_widget.x == 50
-    assert my_widget.y == 50
-    assert my_widget.z == 10
-    assert np.array_equal(viewer.layers[-1].data, np.array([[[50, 0, 10], [0, 100-1, 0]],
-                                                            [[0, 50, 10], [100-1, 0, 0]]]))
+    assert my_widget.x == 50-1
+    assert my_widget.y == 50-1
+    assert my_widget.z == 10-1
+    assert np.array_equal(viewer.layers[-1].data, np.array([[[50-1, 0, 10-1], [0, 100-2, 0]],
+                                                            [[0, 50-1, 10-1], [100-2, 0, 0]]]))
     # click and test end position
     # Simulate click
     click_event = Event(
@@ -166,9 +166,9 @@ def test_orthoslice_click(make_napari_viewer, qtbot, Event):
     my_widget.mouse_single_click(my_widget.main_view, click_event)
     assert my_widget.x == 75
     assert my_widget.y == 75
-    assert my_widget.z == 10
-    assert np.array_equal(viewer.layers[-1].data, np.array([[[75, 0, 10], [0, 100-1, 0]],
-                                                            [[0, 75, 10], [100-1, 0, 0]]]))
+    assert my_widget.z == 10-1
+    assert np.array_equal(viewer.layers[-1].data, np.array([[[75, 0, 10-1], [0, 100-2, 0]],
+                                                            [[0, 75, 10-1], [100-2, 0, 0]]]))
     # Insert a layer while in orthoslice view
     viewer.add_image(data=np.random.random((100, 100, 20)), name='test')
     assert my_widget.yz_view.layers[-2].name == 'test'

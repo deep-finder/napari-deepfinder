@@ -6,7 +6,7 @@ import napari.layers
 from napari.qt.threading import create_worker
 import numpy as np
 import os
-from deepfinder import Segment
+from deepfinder.inference import Segment
 from deepfinder.utils import core
 from deepfinder.utils import common as cm
 from deepfinder.utils import smap as sm
